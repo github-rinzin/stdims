@@ -47,13 +47,19 @@ Route::prefix('admin')->group(function () {
 /****************************  THIS SECTION IS FOR TEACHER ***************************************************************************/
 /*************************************************************************************************************************************/
 
-Route::prefix('teacher')->group(
-    function () {
-        Route::view('attendance','attendance.teacher.index');
-        Route::view('dashboard','dashboard.teacher.index');
-        Route::view('result','result.teacher.index');
-    }
-);
+Route::prefix('teacher')->group(function () {
+    Route::view('attendance','attendance.teacher.index');
+    Route::view('attendance/show','attendance.teacher.show');
+    Route::view('attendance/create','attendance.teacher.create');
+    Route::view('dashboard','dashboard.teacher.index');
+    Route::view('result','result.teacher.index');
+    Route::view('statement','statement.teacher.index');
+    Route::view('statement/show','statement.teacher.show');
+    
+    Route::view('detail','detail.teacher.index');
+    Route::view('detail/show','detail.teacher.show');
+    Route::view('detail/edit','detail.teacher.edit');
+});
 
 
 
@@ -66,9 +72,14 @@ Route::prefix('teacher')->group(
 
 Route::prefix('student')->group(
     function () {  
-        Route::view('/aindex','attendance.student.index');
-        Route::view('/pindex','dashboard.student.index');
-        Route::view('/pedit','dashboard.student.edit');
+        Route::view('/attendance','attendance.student.index');
+        Route::view('/detail','detail.student.index');
+        Route::view('/detail/edit','detail.student.edit');
+        Route::view('/result','result.student.index');
+        Route::view('/result/show','result.student.show');
+        Route::view('/statement','statement.student.index');
+        Route::view('/statement/create','statement.student.create');
+        Route::view('/class/create','class.student.create'); 
     }
 );
 

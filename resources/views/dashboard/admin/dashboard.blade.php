@@ -4,11 +4,10 @@
 @endsection
     <div id="wrapper">
         @include('inc.admin.sidebar')
-
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
 
-                @include('inc.admin.topbar')
+                @include('components.topbar')
 
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">

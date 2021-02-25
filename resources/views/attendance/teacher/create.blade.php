@@ -1,6 +1,5 @@
 @extends('layouts.teacher')
 @section('content')
-
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0">
@@ -9,7 +8,7 @@
                     <div class="sidebar-brand-text mx-3"><span>STUDENT IMS</span></div>
                 </a>
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="class-teacher-dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="class-teacher-dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="approve-student-index.html"><i class="fas fa-table"></i><span>Approve Student</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="student-details-index.html"><i class="fas fa-users"></i><span>Student Details&nbsp;</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="attendance-index.html"><i class="fas fa-user-check"></i><span>Attendance</span></a></li>
@@ -20,7 +19,7 @@
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content" style="color: rgb(2,3,7);">
+            <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
@@ -44,36 +43,51 @@
                 </nav>
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Dashboard</h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-left-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col mr-2">
-                                            <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Number of students</span></div>
-                                            <div class="text-dark font-weight-bold h5 mb-0"><span>33</span></div>
-                                        </div>
-                                    </div>
+                        <h3 class="text-dark mb-0">Attendance</h3><a href="attendance-index.html"><button class="btn ml-auto" type="button"><i class="fa fa-long-arrow-left"></i>&nbsp;Back&nbsp;</button></a></div>
+                    <form>
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <div class="form-group form-inline"><label>Attendance for :&nbsp;&nbsp;</label><input class="form-control" type="date"></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                    <table class="table dataTable my-0" id="dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Student Number</th>
+                                                <th>Student Name</th>
+                                                <th class="text-center">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Dorji</td>
+                                                <td class="text-center"><input type="checkbox" style="margin-left: 0px;" checked=""></td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Pema Zam</td>
+                                                <td class="text-center"><input type="checkbox" style="margin-left: 0px;" checked=""></td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Pema Yangzin</td>
+                                                <td class="text-center"><input type="checkbox" style="margin-left: 0px;" checked=""></td>
+                                            </tr>
+                                            <tr></tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr></tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6"><button class="btn btn-primary" type="button"><i class="far fa-calendar-plus"></i>&nbsp; Submit</button></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-left-success py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col mr-2">
-                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>unapproved students</span></div>
-                                            <div class="text-dark font-weight-bold h5 mb-0"><span>07</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
+                    </form>
                 </div>
             </div>
-            @include('inc.footer')
  @endsection
