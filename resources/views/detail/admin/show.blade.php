@@ -1,14 +1,10 @@
-@extends('layouts.student')
+@extends('layouts.admin')
 @section('content')
-
-<div class="container-fluid">
+ <div class="container-fluid">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Detail</h3>
+        <h3 class="text-dark mb-0">Student</h3><a class="ml-0" href="student-detail-edit.html"><button class="btn" type="button">Edit&nbsp;<i class="far fa-edit"></i></button></a>
         @include('components.previous')
     </div>
-</div>
-<div class="container-fluid">
-    <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
     <div class="card">
         <div class="card-body">
             <div class="card-body">
@@ -99,12 +95,11 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col"><a href="student-edit.html"><button class="btn btn-primary ml-auto" type="button">Edit&nbsp; &nbsp;<i class="fa fa-edit"></i>&nbsp;</button></a></div>
+                        <div class="col"><a href="#"><button class="btn btn-primary ml-auto" type="button">Edit&nbsp; &nbsp;<i class="fa fa-edit"></i>&nbsp;</button></a></div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 @endsection

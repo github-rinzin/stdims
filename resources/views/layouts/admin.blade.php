@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+
+ <!DOCTYPE html>
 <html>
 
 <head>
@@ -17,9 +19,17 @@
 </head>
 
 <body id="page-top">
-    <div class="wrapper">
-        @yield('content')
-    </div>
+   
+    <div id="wrapper">
+        @include('inc.admin.sidebar')
+         <div class="d-flex flex-column" id="content-wrapper">
+             <div id="content">
+                @include('components.topbar')
+                 @yield('content')
+                 @include('components.footer')
+             </div>
+         </div>
+     </div>
     
     <script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/assets/bootstrap/js/bootstrap.min.js') }}"></script>

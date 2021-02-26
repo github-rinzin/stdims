@@ -21,8 +21,16 @@
 </head>
 
 <body id="page-top">
-    @yield('content')
-
+    <div id="wrapper">
+        @include('inc.student.sidebar')
+         <div class="d-flex flex-column" id="content-wrapper">
+             <div id="content">
+                @include('components.topbar')
+                 @yield('content')
+                 @include('components.footer')
+             </div>
+         </div>
+     </div>
     <script src="{{ asset('student/assets/js/Profile-Edit-Form.js')}}"></script>
     <script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/assets/bootstrap/js/bootstrap.min.js') }}"></script>
