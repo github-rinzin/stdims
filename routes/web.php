@@ -46,6 +46,7 @@ Route::prefix('admin')->group(function () {
    Route::view('statement/','statement.admin.index');
    Route::view('statement/class/','statement.admin.index_class');
    Route::view('statement/student/','statement.admin.index_student');
+   Route::view('statement/show','statement.admin.show');
 });
 
 
