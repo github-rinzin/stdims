@@ -63,6 +63,7 @@ Route::prefix('teacher')->group(function () {
     Route::view('dashboard','dashboard.teacher.index');
     Route::view('result','result.teacher.index');
     Route::view('statement','statement.teacher.index');
+    Route::view('statement/view','statement.teacher.view');
     Route::view('statement/show','statement.teacher.show');
     Route::view('detail','detail.teacher.index');
     Route::view('detail/show','detail.teacher.show');

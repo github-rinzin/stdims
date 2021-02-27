@@ -8,7 +8,20 @@
 </div>
 <div class="container-fluid">
     <div class="card">
-        <div class="card-header"><a href="class-create.html"><button class="btn btn-primary" type="button"><i class="fa fa-plus"></i>&nbsp; Add</button></a></div>
+        <div class="card-header">
+            {{-- <a href="class-create.html"><button class="btn btn-primary" type="button"><i class="fa fa-plus"></i>&nbsp; Add</button></a> --}}
+            <form class="container">
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group"><label>Class</label><input class="form-control" type="email"></div>
+                    </div>
+                    <div class="col"><label>Section</label><input class="form-control" type="text"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col"><button class="btn btn-primary" type="button"><i class="icon ion-ios-plus-outline"></i>&nbsp;Add</button></div>
+                </div>
+            </form>
+        </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                 <table class="table dataTable my-0" id="dataTable">
