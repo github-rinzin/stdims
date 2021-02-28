@@ -1,12 +1,11 @@
 @extends('layouts.admin')
 @section('content')    
-<div class="container">
-<div class="d-sm-flex justify-content-between align-items-center mb-4">
-    <h4 class="text-dark mb-0">Dashboard</h4>
-    @include('components.previous')
-</div>
-</div>
-<div class="container-fluid">
+   
+<div class="container-fluid w-75">
+    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+        <h4 class="text-dark mb-0">Dashboard</h4>
+        @include('components.previous')
+    </div>
     <div class="row">
         <div class="col-md-6 col-xl-3 mb-4">
             <div class="card shadow border-left-primary py-2">
@@ -45,15 +44,13 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid">
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">Class Teacher&nbsp;</p>
         </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
+                <table class="table table-bordered table-sm dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -100,15 +97,13 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid" id="student-info" style="margin-top: 5%;">
-    <div class="card shadow">
+    <div class="card shadow mt-3">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">Student</p>
         </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
+                <table class="table table-bordered table-sm dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -154,6 +149,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 

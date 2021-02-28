@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="container-fluid">
+<div class="w-75 container-fluid">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Attendance</h3><a href="admin-dashboard-index.html"><button class="btn ml-auto text-uppercase" type="button"><i class="fa fa-long-arrow-left"></i>&nbsp;Back&nbsp;</button></a></div>
-</div>
-<div class="container-fluid">
+        <h3 class="text-dark mb-0">Attendance</h3><a href="admin-dashboard-index.html">
+        @include('components.previous')
+    </div>
     <form>
         <div class="card shadow">
             <div class="card-body">
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0" id="dataTable">
+                    <table class="table-bordered table table-sm dataTable my-0" id="dataTable">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -27,13 +27,11 @@
                                 <td>Monday</td>
                             <form>
                                 @csrf
-                                <td style="padding: 0;">
-                                    <div class="form-group align-content-center" style="margin-bottom: 0;">
-                                        <input type="checkbox" style="margin: 0px;margin-right: 0;margin-left: 46%;margin-top: 19px;">
-                                    </div>
+                                <td class="text-center">
+                                    <input type="checkbox" >
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button">Update</button>
+                                    <button class="btn btn-sm btn-primary" type="button">Update</button>
                                 </td>
                             </form>
                             </tr>

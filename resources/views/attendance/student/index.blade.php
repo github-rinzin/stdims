@@ -1,35 +1,41 @@
 @extends('layouts.student')
 @section('content')
-<div class="container">
+<div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h4 class="text-dark mb-0">Attendance</h4>
         @include('components.previous')
     </div>
-</div>
-<div class="container">
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">Attandance Information</p>
         </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
+                <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
                             <th>Serial Number</th>
-                            <th>Date</th>
                             <th>Day</th>
-                            <th>Status</th>
+                            <th>Date</th>
+                            <th class="text-center">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>0001</td>
-                            <td>12/10/2021</td>
+                            <td>1</td>
                             <td>Monday</td>
-                            <td>P</td>
+                            <td>12/10/2021</td>
+                            <td class="text-center">P</td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Serial Number</th>
+                            <th>Day</th>
+                            <th>Date</th>
+                            <th class="text-center">Status</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <div class="row">

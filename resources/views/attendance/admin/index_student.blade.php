@@ -1,18 +1,19 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Attendance</h3>
         @include('components.previous')
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid w-75">
     <div class="card shadow">
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
+                <table class="table-bordered table-sm table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Student Number</th>
                             <th>Name</th>
                             <th>Status</th>
@@ -21,14 +22,23 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>2376821</td>
+                            <td>1</td>
+                            <td>`12180038</td>
                             <td>Choki Wangchuk</td>
                             <td>12/12</td>
-                            <td><a class="text-center" href="attendance-student-show.html" style="padding: 11px;"><i class="fa fa-eye"></i></a></td>
+                            <td>
+                                <a class="text-center" href="" style="padding: 11px;">
+                                     <button class="btn btn-sm text-uppercase btn-primary" type="submit">
+                                        {{-- <i class="fa fa-eye"></i> --}}
+                                        view
+                                    </button>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
+                            <td><strong>#</strong></td>
                             <td><strong>Student Number</strong></td>
                             <td><strong>Name</strong></td>
                             <td><strong>Status</strong></td>

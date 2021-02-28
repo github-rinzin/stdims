@@ -1,4 +1,4 @@
-<footer class="bg-white sticky-footer">
+<footer class="bg-white sticky-footer mt-5">
     <div class="container my-auto">
         <div class="text-center my-auto copyright"><span>Copyright © Student 2021</span></div>
     </div>
