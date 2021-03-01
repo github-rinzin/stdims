@@ -1,42 +1,49 @@
 @extends('layouts.teacher')
 @section('content')
-<div class="container-fluid">
-    <div class="d-sm-flex justify-content-between align-items-center mb-4" placeholder="search by name">
+
+
+<div class="container-fluid w-75">
+    <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Statement&nbsp;</h3>
         @include('components.previous') 
     </div>
-</div>
-<div class="container-fluid">
     <div class="card shadow">
         <div class="card-header">
-            <form class="form-inline mr-auto" target="_self">
-                <div class="form-group"><label for="search-field"></label><input class="form-control search-field" type="search" id="search-field" name="search" placeholder="Search by name...."></div><i class="fa fa-search ml-2" style="font-size: 20pt;"></i></form>
+            <div class="card-text">
+                <p class="align-baseline">Student Name: Dorji&nbsp;</p>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
+                <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th class="text-left">Student Number</th>
-                            <th class="text-left">Name</th>
-                            <th class="text-left">Number of Statement</th>
-                            <th class="text-left">Actions</th>
+                            <th class="text-center">#</th>
+                            <th class="text-left">Subject</th>
+                            <th class="text-left">Date</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        
                         <tr>
-                            <td>12180080</td>
-                            <td>Choki Wangchuk</td>
-                            <td>1</td>
-                            <td class="text-dark"><a class="text-center" href="statement-index.html" style="padding: 11px;"><i class="fa fa-eye" style="/*color: black;*/"></i></a></td>
+                            <td class="text-center">03</td>
+                            <td>Fighting</td>
+                            <td>2/FEB/2021</td>
+                            <td class="text-center">
+                                <a class="text-center text-dark" href="statement-show.html" >
+                                    {{-- <i class="fa fa-eye"></i> --}}
+                                    <button class="btn btn-sm btn-primary">view</button>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td><strong>Student Number</strong></td>
-                            <td><strong>Name</strong></td>
-                            <td class="text-left"><strong>Number of Statement</strong></td>
-                            <td class="text-left"><strong>Actions</strong></td>
+                            <td class="text-center"><strong>#</strong></td>
+                            <td class="text-left"><strong>Subject</strong></td>
+                            <td class="text-left"><strong>Date&nbsp;</strong></td>
+                            <td class="text-center"><strong>Actions</strong></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -57,5 +64,20 @@
         </div>
     </div>
 </div>
-
+            
+    </div>
+</div>
+            
+    </div>
+</div>
+            
+    </div>
+</div>
+            
+    </div>
+</div>
+            
+    </div>
+</div>
+            
 @endsection
