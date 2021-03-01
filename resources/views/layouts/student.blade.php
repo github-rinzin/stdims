@@ -11,12 +11,10 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/fonts/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/fonts/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/fonts/fontawesome5-overrides.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('student/assets/css/Box-panels-1.css')}}">
     <link rel="stylesheet" href="{{ asset('student/assets/css/Box-panels.css')}}">
     <link rel="stylesheet" href="{{ asset('student/assets/css/Lista-Productos-Canito.css')}}">
     <link rel="stylesheet" href="{{ asset('student/assets/css/Profile-Edit-Form-1.css')}}">
     <link rel="stylesheet" href="{{ asset('student/assets/css/Profile-Edit-Form.css')}}">
-    <link rel="stylesheet" href="{{ asset('student/assets/css/untitled-1.css')}}">
 
 </head>
 

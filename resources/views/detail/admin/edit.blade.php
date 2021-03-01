@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Student&nbsp;</h3>
          @include('components.previous')

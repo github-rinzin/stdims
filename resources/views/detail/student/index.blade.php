@@ -1,13 +1,11 @@
 @extends('layouts.student')
 @section('content')
 
-<div class="container-fluid">
-    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+<div class="container-fluid w-75">
+    <div class="d-sm-flex justify-content-between align-items-center">
         <h3 class="text-dark mb-0">Detail</h3>
         @include('components.previous')
     </div>
-</div>
-<div class="container-fluid">
     <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
     <div class="card">
         <div class="card-body">

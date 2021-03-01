@@ -1,21 +1,24 @@
 @extends('layouts.teacher')
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Student</h3>
         @include('components.previous')
     </div>
     <div class="card shadow">
-        <div class="card-header py-3">
-            <p class="text-primary m-0 font-weight-bold">Student Information</p>
-        </div>
+        
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <div class="row">
+                    <div class="">
+                        <p class="text-primary m-0 font-weight-bold">Student Information</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row float-right">
                         <div class="col-md-6 text-nowrap">
-                            <form class="form-inline mr-auto" target="_self">
+                            <form class="form-inline " target="_self">
                                 <div class="form-group"><label for="search-field"></label><input class="form-control search-field" type="search" id="search-field" name="search" placeholder="Search by name"><i class="fa fa-search ml-2" style="font-size: 20pt;"></i></div>
                             </form>
                         </div>
@@ -23,31 +26,41 @@
                 </div>
             </div>
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
+                <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
+                            <th class="text-center">#</th>
                             <th>Student Number</th>
                             <th>Student Name</th>
-                            <th>Operations</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>&nbsp;Pema Yangzin</td>
-                            <td><a href="student-details-show.html"><i class="fa fa-eye" style="margin: 2%;color: rgb(87,97,201);padding: 7px;"></i></a><a href="student-details-edit.html"><i class="fa fa-pencil-square-o" style="margin: 2%;color: rgb(87,97,201);padding: 7px;"></i></a></td>
+                            <td class="text-center">1</td>
+                            <td>121800xx</td>
+                            <td>Pema Yangzin</td>
+                            <td class="text-center">
+                                <a href="student-details-show.html">
+                                    <button class="btn btn-sm btn-primary">
+                                        view
+                                    </button>
+                                </a>
+                                <a href="student-details-edit.html">
+                                   <button class="btn btn-sm btn-info">
+                                       edit
+                                   </button>
+                                </a>
+                            </td>
                         </tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
+
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <th class="text-center">#</th>
+                            <th>Student Number</th>
+                            <th>Student Name</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </tfoot>
                 </table>

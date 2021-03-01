@@ -1,8 +1,13 @@
 @extends('layouts.admin')
 @section('content')
- <div class="container-fluid">
+ <div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Student</h3><a class="ml-0" href="student-detail-edit.html"><button class="btn" type="button">Edit&nbsp;<i class="far fa-edit"></i></button></a>
+        <h3 class="text-dark mb-0">Student</h3>
+        <a class="ml-0" href="">
+            <button class="btn btn-sm" type="button">
+                Edit&nbsp;<i class="far fa-edit"></i>
+            </button>
+        </a>
         @include('components.previous')
     </div>
     <div class="card">

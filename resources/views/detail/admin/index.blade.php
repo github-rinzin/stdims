@@ -1,12 +1,10 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Student</h3>
         @include('components.previous')
     </div>
-</div>
-<div class="container-fluid">
     <div class="alert alert-success" role="alert" style="margin: 1px;margin-left: 0;margin-right: 0;margin-bottom: 14px;margin-top: -16px;"><span><strong>Updated Successfully</strong>.</span></div>
     <div class="card shadow">
         <div class="card-header">
@@ -18,9 +16,10 @@
         </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
+                <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
+                            <th class="text-center">#</th>
                             <th class="text-left">Student Number</th>
                             <th class="text-left">Name</th>
                             <th class="text-left">Age</th>
@@ -30,19 +29,25 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td class="text-center">1</td>
                             <td>2376821</td>
                             <td>Rinzin Dorji</td>
                             <td>21</td>
                             <td>11505000945</td>
-                            <td class="text-center"><span style="padding: 8px;"><a href=""><i class="fa fa-eye"></i></a></span><span style="padding: 6px;"><a href="student-detail-edit.html"><i class="fa fa-edit"></i></a></span>
-                                <span
-                                    style="padding: 3px;"><a href="#"><button class="btn btn-sm text-uppercase" data-target="#delete-student-personal-detail" data-toggle="modal"><i class="icon ion-trash-a" data-toggle="" style="color: #224abe;font-size: 12pt;"></i></button></a>
-                                </span>
+                            <td class="text-center">
+                               
+                                <button class="btn btn-sm btn-primary">
+                                    view
+                                </button>
+                                <button class="btn btn-sm btn-dark" data-target="#delete-student-personal-detail" data-toggle="modal">
+                                    delete
+                                </button>
                             </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
+                            <th class="text-center">#</th>
                             <td><strong>Student Number</strong></td>
                             <td><strong>Name</strong></td>
                             <td><strong>Age</strong></td>

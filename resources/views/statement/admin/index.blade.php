@@ -1,40 +1,36 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container-fluid">
+
+<div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Statement</h3>
+        <h3 class="text-dark mb-0">{{ __('Rinzin Dorji') }}</h3>
         @include('components.previous')
     </div>
-</div>
-<div class="container-fluid">
     <div class="card shadow">
-        <div class="card-header">
-            <div class="card-text">
-                <p style="margin-bottom: 0;">Student Name: Rinzin Dorji&nbsp;</p>
-            </div>
-        </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
+                <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th class="text-left">#</th>
+                            <th class="text-center">#</th>
                             <th class="text-left">Subject</th>
                             <th class="text-left">Date of Statement</th>
-                            <th class="text-left">Actions</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>2376821</td>
+                            <td class="text-center">1</td>
                             <td>Drinking&nbsp;</td>
                             <td>1/JAN/2020</td>
-                            <td>
+                            <td class="text-center">
                             	<a class="text-center text-dark" href="" style="padding: 11px;">
-                            		<i class="fa fa-eye"></i>
+                            		{{-- <i class="fa fa-eye"></i> --}}
+                                    <button class="btn btn-sm btn-primary">view</button>
                             	</a>
-                            	<a class="text-center text-dark" href="#" style="padding: 11px;" data-toggle="modal" data-target="#delete-statement">
-                            		<i class="icon ion-trash-a"></i>
+                            	<a class="text-center text-dark" href="#"  data-toggle="modal" data-target="#delete-statement">
+                            		{{-- <i class="icon ion-trash-a"></i> --}}
+                                    <button class="btn btn-sm btn-dark">delete</button>
                             	</a>
                             </td>
                         </tr>
@@ -44,7 +40,7 @@
                             <td><strong>#</strong></td>
                             <td class="text-left"><strong>Subject</strong></td>
                             <td class="text-left"><strong>Date of Statement</strong></td>
-                            <td class="text-left"><strong>Actions</strong></td>
+                            <td class="text-center"><strong>Actions</strong></td>
                         </tr>
                     </tfoot>
                 </table>

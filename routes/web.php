@@ -66,7 +66,7 @@ Route::prefix('teacher')->group(function () {
     Route::view('dashboard','dashboard.teacher.index');
     Route::view('result','result.teacher.index');
     Route::view('statement','statement.teacher.index');
-    Route::view('statement/view','statement.teacher.view');
+    Route::view('statement/student','statement.teacher.student_index');
     Route::view('statement/show','statement.teacher.show');
     Route::view('detail','detail.teacher.index');
     Route::view('detail/show','detail.teacher.show');
@@ -84,6 +84,7 @@ Route::prefix('student')->group(
         Route::view('/detail','detail.student.index');
         Route::view('/detail/edit','detail.student.edit');
         Route::view('/result','result.student.index');
+        Route::view('/result/show','result.student.show');
         Route::view('/statement','statement.student.index');
         Route::view('/statement/create','statement.student.create');
         Route::view('/statement/show','statement.student.show');
