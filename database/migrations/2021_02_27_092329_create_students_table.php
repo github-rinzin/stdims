@@ -29,8 +29,10 @@ class CreateStudentsTable extends Migration
             $table->string('mothers_address');
             $table->string('gurdian_name');
             $table->integer('gurdian_contact');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            
             $table->timestamps();
         });
     }

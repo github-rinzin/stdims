@@ -1,88 +1,110 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container-fluid w-75">
+    @if (session('msg'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ session('msg') }}
+        <button id="btn-close" type="button" class="btn-close float-right btn mb-2 pt-0" data-bs-dismiss="alert" aria-label="Close">x</button>
+      </div>
+    @endif
+ 
+    <script type="text/javascript">
+        $("#btn-close").click(function(){
+            $(".alert-dismissible").hide();
+        });
+    </script>
+
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Class</h3>
         @include('components.previous')
     </div>
     <div class="card">
+        
         <div class="card-header m-0">
-            {{-- <a href="class-create.html"><button class="btn btn-primary" type="button"><i class="fa fa-plus"></i>&nbsp; Add</button></a> --}}
-            <form action="" method="">
-                @csrf
-                <div class="form-row m-0">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <input class="form-control form-control-sm" type="text" placeholder="class numeric....">
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <input class="form-control form-control-sm" type="text" placeholder="division/section name...">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-sm btn-primary" type="button">
-                            <i class="icon ion-ios-plus-outline"></i>Add
-                        </button>
-                    </div>
+            <a class="btn btn-primary" href="{{ route('class.create') }}">   
+                New Class   
+            </a>
+        </div>
+        <div class="card-body container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                        <table class="table table-sm table-bordered dataTable my-0 " id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-left">Class</th>
+                                    <th class="text-left">Section</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($classDivisions as $classDivision)
+                                    
+                                <tr>
+                                    <td class="text-center">{{ $i++ }}</td>
+                                    <td>{{ $classDivision->grade->numeric }}</td>
+                                    <td>{{ $classDivision->division->name }}</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="{{ '#delete-class'.$classDivision->id }}">
+                                            <i class="far fa-trash-alt"></i> &nbsp; delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <div class="modal fade" role="dialog" tabindex="-1" id="{{ 'delete-class'.$classDivision->id }}">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Confirm Delete</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                                                <div class="modal-body text-center">
+                                                    <p>Are you sure you want to delete the class ?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-sm btn-light" type="button" data-dismiss="modal">Close</button>
+                                                    <form class="" action="{{route('class.destroy', $classDivision->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn   btn-danger" type="submit">Yes, Confirm</button>
+                                                    </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center"><strong>#</strong></td>
+                                    <td class="text-left"><strong>Class</strong></td>
+                                    <td class="text-left"><strong>Section</strong></td>
+                                    <td class="text-center"><strong>Actions</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>   
                 </div>
-               
-            </form>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
-                <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
-                    <thead>
-                        <tr>
-                            <th class="text-left">#</th>
-                            <th class="text-left">Class</th>
-                            <th class="text-left">Section</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>B</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#delete-class">
-                                    <i class="far fa-trash-alt"></i> &nbsp; delete
-                                </button>
-                            </td>
-                        </tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td><strong>#</strong></td>
-                            <td class="text-left"><strong>Class</strong></td>
-                            <td class="text-left"><strong>Section</strong></td>
-                            <td class="text-center"><strong>Actions</strong></td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div class="col-md-6">
+                    <form action="{{ route('grade.store') }}" method="POST"> 
+                        @csrf
+                        <div class="mb-3">
+                          <label for="gradeNumeric" class="form-label text-capitalize">Grade numeric</label>
+                          <input name="numeric" type="text" class="form-control" id="gradeNumeric">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                    <form class="mt-4" action="{{ route('division.store') }}" method="POST"> 
+                        @csrf
+                        <div class="mb-3">
+                        <label for="divisionName" class="form-label text-capitalize">Division name</label>
+                        <input name="division_name" type="text" class="form-control" id="divisionName">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" role="dialog" tabindex="-1" id="delete-class">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Warning</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-            <div class="modal-body text-center">
-                <p>Are you sure you want to delet the class ?</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-light" type="button" data-dismiss="modal">Close</button>
-                <button class="btn  btn-sm btn-danger" type="button">Yes</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection

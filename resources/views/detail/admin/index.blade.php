@@ -5,7 +5,11 @@
         <h3 class="text-dark mb-0">Student</h3>
         @include('components.previous')
     </div>
-    <div class="alert alert-success" role="alert" style="margin: 1px;margin-left: 0;margin-right: 0;margin-bottom: 14px;margin-top: -16px;"><span><strong>Updated Successfully</strong>.</span></div>
+    @if (session('msg'))    
+    <div class="alert alert-success" role="alert" style="margin: 1px;margin-left: 0;margin-right: 0;margin-bottom: 14px;margin-top: -16px;">
+        <span><strong>{{ session('msg') }}</strong>.</span>
+    </div>
+    @endif
     <div class="card shadow">
         <div class="card-header">
             <form class="form-inline mr-auto" target="_self">
@@ -28,22 +32,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($students as $student)
                         <tr>
                             <td class="text-center">1</td>
-                            <td>2376821</td>
-                            <td>Rinzin Dorji</td>
-                            <td>21</td>
-                            <td>11505000945</td>
+                            <td>{{ $student->code }}</td>
+                            <td>{{ $student->name }}</td>
+                            <td>{{ $student->age }}</td>
+                            <td>{{ $student->cid }}</td>
                             <td class="text-center">
                                
-                                <button class="btn btn-sm btn-primary">
+                                <a href="{{ route('student.show', $student->id) }}" class="btn btn-sm btn-primary">
                                     view
-                                </button>
+                                </a>
                                 <button class="btn btn-sm btn-dark" data-target="#delete-student-personal-detail" data-toggle="modal">
                                     delete
                                 </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>

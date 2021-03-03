@@ -9,16 +9,29 @@
     <div class="card shadow">
         <div class="card-body">
             <div class="card-body">
-                <form class="container">
+                <form class="container" action="{{ route('class.store')}}" method="POST">
+                    @csrf
                     <div class="form-row">
                         <div class="col">
-                            <div class="form-group"><label>Class Numeric</label><input class="form-control" type="email"></div>
+                            <select  name="gradeId" class="form-select form-control form-control-sm" type="text" placeholder="class numeric...." aria-label="Default select example">
+                                <option selected>grade</option>
+                                @foreach ($grades as $grade) 
+                                    <option value="{{ $grade->id}}">{{ $grade->numeric}}</option>
+                                @endforeach
+                              </select>
                         </div>
-                        <div class="col"><label>Section/Division Name</label><input class="form-control" type="text"></div>
+                        <div class="col">
+                            <select name="divisionId" class="form-select form-control form-control-sm"  placeholder="division/section name..." aria-label="Default select example">
+                                <option selected>division</option>
+                                @foreach ($divisions as $division)
+                                    <option value="{{ $division->id}}">{{ $division->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <button class="btn btn-sm btn-primary" type="button"><i class="icon ion-ios-plus-outline"></i>&nbsp;Add</button>
+                            <button class="btn btn-sm btn-primary mt-3" type="submit"><i class="icon ion-ios-plus-outline"></i>&nbsp;Add</button>
                         </div>
                     </div>
                 </form>

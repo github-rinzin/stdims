@@ -17,7 +17,8 @@ class CreateResult1112scisTable extends Migration
             $table->id();
             $table->integer('english');
             $table->integer('dzongkha');
-            $table->integer('maths_biology');
+            $table->integer('maths');
+            $table->integer('bio/math');
             $table->integer('physics');
             $table->integer('chemistry');
             $table->unsignedBigInteger('student_id');

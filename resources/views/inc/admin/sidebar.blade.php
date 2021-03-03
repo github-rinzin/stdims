@@ -5,13 +5,13 @@
             <div class="sidebar-brand-text mx-3"><span>Student ims</span></div>
         </a>
         <ul class="nav navbar-nav text-light" id="accordionSidebar">
-            <li class="nav-item" role="presentation"><a class="nav-link active" href=""><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-            <li class="nav-item" role="presentation"><a class="nav-link" href=""><i class="far fa-user-circle"></i><span>Student</span></a><a class="nav-link" href="class-index.html"><i class="far fa-user-circle"></i><span>Class</span></a></li>
-            <li class="nav-item"
-                role="presentation"><a class="nav-link" href=""><i class="fas fa-chalkboard-teacher"></i><span>Class Teacher</span></a></li>
-            <li class="nav-item" role="presentation"><a class="nav-link" href=""><i class="fas fa-address-book"></i><span>Attendance</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('admin.detail.class') }}"><i class="far fa-user-circle"></i><span>Student</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('class.index') }}"><i class="far fa-user-circle"></i><span>Class</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" href=""><i class="fas fa-chalkboard-teacher"></i><span>Class Teacher</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('admin.attendance.class') }}"><i class="fas fa-address-book"></i><span>Attendance</span></a></li>
             <li class="nav-item" role="presentation"><a class="nav-link" href=""><i class="fas fa-user-circle"></i><span>Result</span></a></li>
-            <li class="nav-item" role="presentation"><a class="nav-link" href=""><i class="fas fa-user-circle"></i><span>Statement</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('admin.statement.class') }}"><i class="fas fa-user-circle"></i><span>Statement</span></a></li>
         </ul>
         <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
     </div>

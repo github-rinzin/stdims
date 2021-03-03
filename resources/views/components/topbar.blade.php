@@ -2,7 +2,7 @@
     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
         <ul class="nav navbar-nav flex-nowrap ml-auto">
             <li class="nav-item dropdown no-arrow" role="presentation">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">{{ __('Admin') }}</a>
+                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link text-capitalize" data-toggle="dropdown" aria-expanded="false" href="#">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
                         <a  class="dropdown-item" 
                             role="presentation" 

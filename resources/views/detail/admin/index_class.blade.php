@@ -19,19 +19,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($teachers as $teacher)     
                         <tr>
-                            <td>1</td>
-                            <td>3</td>
-                            <td class="text-left">A</td>
-                            <td>Phuntsho Choden</td>
+                            <td>{{ $i++ }}</td>
+                            <td>{{ $teacher->classDivision->grade->numeric }}</td>
+                            <td class="text-left">{{ $teacher->classDivision->division->name }}</td>
+                            <td>{{ $teacher->name }}</td>
                             <td class="text-center">
-                               <a href="">
+                               <a href="{{ route('index.class.detail', $teacher->id ) }}">
                                    <button class="btn btn-sm btn-primary">
                                        view
                                    </button>
                                </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>

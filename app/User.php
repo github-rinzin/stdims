@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable     
 {
     use Notifiable;
 
@@ -15,6 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -48,7 +49,9 @@ class User extends Authenticatable
     public function teacher() {
         return $this->hasOne(Teacher::class);
     }
-    // public function admin() {
-
-    // }
+    public function is($role) {
+        // change first to get 
+        $role = Role::where('name',$role)->first();
+        return $this->role_id == $role->id;
+    }
 }

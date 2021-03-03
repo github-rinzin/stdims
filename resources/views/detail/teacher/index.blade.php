@@ -34,25 +34,29 @@
                             <th>Student Name</th>
                             <th class="text-center">Actions</th>
                         </tr>
+
                     </thead>
                     <tbody>
+                        @foreach ($students as $student)
+                            
                         <tr>
                             <td class="text-center">1</td>
-                            <td>121800xx</td>
-                            <td>Pema Yangzin</td>
+                            <td>{{ $student->code }}</td>
+                            <td>{{ $student->name }}</td>
                             <td class="text-center">
-                                <a href="student-details-show.html">
+                                <a href="{{ route('student.show', $student->id) }}">
                                     <button class="btn btn-sm btn-primary">
                                         view
                                     </button>
                                 </a>
-                                <a href="student-details-edit.html">
-                                   <button class="btn btn-sm btn-info">
-                                       edit
-                                   </button>
+                                <a href="{{ route('student.edit', $student->id ) }}">
+                                    <button class="btn btn-sm btn-info">
+                                        edit
+                                    </button>
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
 
                     </tbody>
                     <tfoot>
