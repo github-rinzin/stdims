@@ -46,12 +46,15 @@
                                 <a href="{{ route('student.show', $student->id) }}" class="btn btn-sm btn-primary">
                                     view
                                 </a>
-                                <button class="btn btn-sm btn-dark" data-target="#delete-student-personal-detail" data-toggle="modal">
+                                <button class="btn btn-sm btn-dark delete-student"  data-target="#delete-student-personal-detail" data-toggle="modal">
                                     delete
                                 </button>
                             </td>
                         </tr>
+                      
                         @endforeach
+                     
+                       
                     </tbody>
                     <tfoot>
                         <tr>
@@ -75,7 +78,9 @@
         </div>
     </div>
 </div>
-<div class="modal fade" role="dialog" tabindex="-1" id="delete-student-personal-detail">
+
+ {{-- delete modal - start --}}
+ <div class="modal fade" role="dialog" tabindex="-1" id="delete-student-personal-detail">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -83,8 +88,12 @@
             <div class="modal-body">
                 <p>You are about to delete the detail permenantly !</p>
             </div>
-            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Delete</button></div>
+            <div class="modal-footer">
+                <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary modal-delete-button"  type="button" >Delete</button>
+            </div>
         </div>
     </div>
 </div>
+{{-- delete modal - end --}}
 @endsection

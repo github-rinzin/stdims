@@ -48,8 +48,6 @@ class ClassDivisionController extends Controller
         if($request->gradeId == "empty" || $request->divisionId == "empty") {
             return redirect()->route('class.index')->with('msg','Enter valid class and division!');
         }
-
-        
         $grade = Grade::findOrFail($request->gradeId);
         $division = Division::findOrFail($request->divisionId);
         $oldClassDivision = ClassDivision::where('grade_id', $request->gradeId)->where('division_id', $request->divisionId)->get();

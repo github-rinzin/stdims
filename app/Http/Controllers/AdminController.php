@@ -19,4 +19,8 @@ class AdminController extends Controller
         $teachers = Teacher::paginate(10);
         return view('statement.admin.index_class')->with('teachers', $teachers)->with('i',1);
     }
+    public function result() {
+        $teachers = Teacher::paginate(10);
+        return view('result.admin.index_class')->with('teachers', $teachers)->with('i',1);
+    }
 }

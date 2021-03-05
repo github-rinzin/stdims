@@ -11,7 +11,8 @@ class AdminStatementController extends Controller
 {
     public function index($id) {
         $statements = Statement::where('student_id', $id)->get();
-        return view('statement.admin.index')->with('statements', $statements)->with('i',1);
+        $student = Student::findOrFail($id);
+        return view('statement.admin.index')->with('statements', $statements)->with('student', $student)->with('i',1);
     }
     public function class($id) {
         $teacher = Teacher::findOrFail($id);

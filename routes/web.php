@@ -50,6 +50,9 @@ Route::prefix('admin')->group(function () {
     Route::prefix('statement')->group(function () {
         Route::get('class', 'AdminController@statement')->name('admin.statement.class');
     });
+    Route::prefix('result')->group(function() {
+        Route::get('class', 'AdminController@result')->name('admin.result.class');
+    });
 });
 
 /** Section 3
@@ -64,13 +67,12 @@ Route::prefix('admin')->group(function () {
         Route::get('detail/{id}','AdminStudentController@class')->name('index.class.detail');
         Route::get('attendance/{id}','AdminAttendanceController@class')->name('index.class.attendance');
         Route::get('statement/{id}','AdminStatementController@class')->name('index.class.statement');
+        Route::get('result/{id}','AdminResultController@class')->name('index.class.result');
     });
     Route::prefix('student')->group(function () {
         Route::get('statement/{id}','AdminStatementController@student')->name('index.student.statement');
         Route::get('statement/index/{id}','AdminStatementController@index')->name('index.student.statement.index');
     });
-   
-
 });
 
 /** Section 4

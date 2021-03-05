@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Attendance</h3>
+        <h3 class="text-dark mb-0">{{$teacher->classDivision->grade->numeric." ".$teacher->classDivision->division->name  }}</h3>
         @include('components.previous')
     </div>
     <div class="card shadow">
@@ -14,8 +14,6 @@
                             <th>#</th>
                             <th>Student Number</th>
                             <th>Name</th>
-                            <th>Status</th>
-                            <th class="text-center">Percentage</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -25,8 +23,6 @@
                             <td>{{ $i++ }}</td>
                             <td>{{ $student->code}}</td>
                             <td>{{ $student->name }}</td>
-                            <td>{{ $student->attendanceStatus()['numerator'].'/'.$student->attendanceStatus()['denomerator'] }}</td>
-                            <td class="text-center">{{ $student->attendanceStatus()['percentage'].'%' }} </td>
                             <td>
                                 <a class="text-center" href="" style="padding: 11px;">
                                     <button class="btn btn-sm text-uppercase btn-primary" type="submit">
@@ -42,8 +38,6 @@
                             <td><strong>#</strong></td>
                             <td><strong>Student Number</strong></td>
                             <td><strong>Name</strong></td>
-                            <td><strong>Status</strong></td>
-                            <th class="text-center">Percentage</th>
                             <td><strong>Actions</strong></td>
                         </tr>
                     </tfoot>
@@ -53,7 +47,7 @@
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                         <ul class="pagination">
-                            {{ $students->links()}}
+                            {{-- {{ $students->links()}} --}}
                         </ul>
                     </nav>
                 </div>
