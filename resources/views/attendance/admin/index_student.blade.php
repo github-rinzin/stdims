@@ -17,24 +17,29 @@
                             <th>Student Number</th>
                             <th>Name</th>
                             <th>Status</th>
+                            <th class="text-center">Percentage</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($students as $student) 
                         <tr>
-                            <td>1</td>
-                            <td>`12180038</td>
-                            <td>Choki Wangchuk</td>
-                            <td>12/12</td>
+                            <td>{{ $i++ }}</td>
+                            <td>{{ $student->code}}</td>
+                            <td>{{ $student->name }}</td>
+                            {{-- <td>{{ $student->attendanceStatus() }}</td> --}}
+                            <td>{{ $student->attendanceStatus()['numerator'].'/'.$student->attendanceStatus()['denomerator'] }}</td>
+                            <td class="text-center">{{ $student->attendanceStatus()['percentage'].'%' }} </td>
                             <td>
                                 <a class="text-center" href="" style="padding: 11px;">
-                                     <button class="btn btn-sm text-uppercase btn-primary" type="submit">
+                                    <button class="btn btn-sm text-uppercase btn-primary" type="submit">
                                         {{-- <i class="fa fa-eye"></i> --}}
                                         view
                                     </button>
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -42,6 +47,7 @@
                             <td><strong>Student Number</strong></td>
                             <td><strong>Name</strong></td>
                             <td><strong>Status</strong></td>
+                            <th class="text-center">Percentage</th>
                             <td><strong>Actions</strong></td>
                         </tr>
                     </tfoot>
@@ -51,11 +57,7 @@
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                         <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            {{ $students->links()}}
                         </ul>
                     </nav>
                 </div>

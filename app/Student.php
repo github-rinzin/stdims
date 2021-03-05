@@ -56,4 +56,19 @@ class Student extends Model
     public function result112scis() {
         return $this->hasMany(Result_11_12sci::class);
     }  
+
+    public function attendanceStatus() {         
+        $numerator =  Attendance::where('student_id', $this->id)->where('status', "true")->count();
+        $denomerator = Attendance::where('student_id', $this->id)->count();
+        $percentage = 0;
+        if( $denomerator == 0) 
+            $percentage = 0;
+        else
+            $percentage = ($numerator / $denomerator) * 100 ;
+        return ['numerator' => $numerator, 'denomerator' => $denomerator, 'percentage' => $percentage] ;
+    }
+    public function statementCount() {
+        $count = Statement::where('student_id', $this->id)->count();
+        return $count;
+    }
 }

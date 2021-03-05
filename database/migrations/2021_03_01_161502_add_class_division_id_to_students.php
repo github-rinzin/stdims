@@ -14,7 +14,7 @@ class AddClassDivisionIdToStudents extends Migration
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->unsignedBigInteger('class_division_id')->unique();
+            $table->unsignedBigInteger('class_division_id');
             $table->foreign('class_division_id')->references('id')->on('class_divisions');
         });
     }

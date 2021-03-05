@@ -10,9 +10,9 @@
         <div class="card-body">
             <form action="" method="">
                 @csrf
-                <div class="form-group"><label>Subject</label><input class="form-control border-0" type="text" readonly="" disabled=""></div>
-                <div class="form-group"><label>Date</label><input class="form-control border-0" type="text" readonly="" disabled=""></div>
-                <div class="form-group"><label>Content</label><textarea class="form-control form-control-lg border-0" readonly="" rows="5" disabled=""></textarea></div>
+                <div class="form-group"><label>Subject</label><input class="form-control border-0" type="text" readonly="" disabled="" value="{{ $statement->subject}}"></div>
+                <div class="form-group"><label>Date</label><input class="form-control border-0" type="text" readonly="" disabled="" value="{{ $statement->created_at->format('Y-m-d')}}"></div>
+                <div class="form-group"><label>Content</label><textarea class="form-control form-control-lg border-0" readonly="" rows="5" disabled="">{{$statement->content}}</textarea></div>
                 <div class="form-group"><button class="btn btn-primary bg-danger" type="button" data-toggle="modal" data-target="#delete-statement"><i class="icon ion-trash-a"></i>&nbsp;Delete</button></div>
             </form>
         </div>

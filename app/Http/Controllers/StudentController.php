@@ -75,7 +75,7 @@ class StudentController extends Controller
         if(auth()->user()->is('admin')) {
 
             # code...
-            return view('detail.admin.index');
+            return view('detail.admin.show')->with('student', $student);
 
         } else if (auth()->user()->is('teacher')) {
 
@@ -98,9 +98,24 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        // this section is for student
-        // if auth()->user()->student->id == student->id
-        return view('detail.student.edit')->with('student', $student);
+        if(auth()->user()->is('admin')) {
+
+            # code...
+            return view('detail.admin.edit')->with('student', $student);
+
+        } else if (auth()->user()->is('teacher')) {
+
+            # code...
+           
+           
+        } else if (auth()->user()->is('student')) {
+
+            # code...
+            return view('detail.student.edit')->with('student', $student);
+            
+        }
+        abort(403);
+
     }
 
     /**
@@ -112,11 +127,9 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-
-        // include validation
         $student->name = $request->name;
-        $student->update($request->all()); 
-        return redirect()->route('student.show',$student->id)->with('msg','successfully updated');
+        $student->save();
+        return redirect()->route('student.edit',$student->id)->with('msg','Successfully updated');
     }
 
     /**

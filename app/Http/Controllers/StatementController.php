@@ -14,7 +14,7 @@ class StatementController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -46,7 +46,7 @@ class StatementController extends Controller
      */
     public function show(Statement $statement)
     {
-        //
+        return view('statement.admin.show')->with('statement', $statement);
     }
 
     /**

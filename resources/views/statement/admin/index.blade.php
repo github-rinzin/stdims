@@ -14,32 +14,34 @@
                         <tr>
                             <th class="text-center">#</th>
                             <th class="text-left">Subject</th>
-                            <th class="text-left">Date of Statement</th>
+                            <th class="text-center">Date of Statement</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($statements as $statement)  
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>Drinking&nbsp;</td>
-                            <td>1/JAN/2020</td>
+                            <td class="text-center">{{ $i++ }}</td>
+                            <td>{{ $statement->subject}}</td>
+                            <td class="text-center">{{ $statement->created_at->format('Y-m-d')}}</td>
                             <td class="text-center">
-                            	<a class="text-center text-dark" href="" style="padding: 11px;">
+                                <a class="text-center text-dark" href="{{ route('statement.show', $statement->student->id ) }}" style="padding: 11px;">
                             		{{-- <i class="fa fa-eye"></i> --}}
                                     <button class="btn btn-sm btn-primary">view</button>
                             	</a>
                             	<a class="text-center text-dark" href="#"  data-toggle="modal" data-target="#delete-statement">
-                            		{{-- <i class="icon ion-trash-a"></i> --}}
+                                    {{-- <i class="icon ion-trash-a"></i> --}}
                                     <button class="btn btn-sm btn-dark">delete</button>
                             	</a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <td><strong>#</strong></td>
                             <td class="text-left"><strong>Subject</strong></td>
-                            <td class="text-left"><strong>Date of Statement</strong></td>
+                            <td class="text-center"><strong>Date of Statement</strong></td>
                             <td class="text-center"><strong>Actions</strong></td>
                         </tr>
                     </tfoot>

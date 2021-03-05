@@ -66,8 +66,8 @@
                         <tr>
                             <td>{{ $i++}}</td>
                             <td class="text-capitalize">{{ $teacher->name }}</td>
-                            <td>{{ $teacher->grade() }}</td>
-                            <td>{{ $teacher->division() }}</td>
+                            <td>{{ $teacher->ClassDivision->grade->numeric }}</td>
+                            <td>{{ $teacher->classDivision->division->name  }}</td>
                             <td>{{ $teacher->totalStudents() }}</td>
                         </tr>
                         @endforeach

@@ -8,13 +8,15 @@ use App\Teacher;
 class AdminController extends Controller
 {
     public function detail() {
-        $teachers = Teacher::paginate(20);
+        $teachers = Teacher::paginate(10);
         return view('detail.admin.index_class')->with('teachers', $teachers)->with('i',1);
     }
     public function attendance() {
-        return view('attendance.admin.index_class');
+        $teachers = Teacher::paginate(10);
+        return view('attendance.admin.index_class')->with('teachers', $teachers)->with('i',1);
     }
     public function statement() {
-        return view('statement.admin.index_class');
+        $teachers = Teacher::paginate(10);
+        return view('statement.admin.index_class')->with('teachers', $teachers)->with('i',1);
     }
 }

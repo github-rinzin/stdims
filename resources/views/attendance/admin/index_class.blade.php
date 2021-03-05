@@ -12,7 +12,7 @@
                 <table class="table table-bordered table-sm dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th class="text-left">#</th>
+                            <th class="text-center">#</th>
                             <th class="text-left">Class&nbsp;</th>
                             <th class="text-left">Section/Division</th>
                             <th class="text-left">Class Teacher</th>
@@ -21,21 +21,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($teachers as $teacher)
+                            
                         <tr>
-                            <td>1</td>
-                            <td>3</td>
-                            <td>A</td>
-                            <td>Phuntsho Choden</td>
-                            <td>40</td>
+                            <td class="text-center">{{ $i++ }}</td>
+                            <td>{{ $teacher->classDivision->grade->numeric }}</td>
+                            <td>{{ $teacher->classDivision->division->name }}</td>
+                            <td>{{ $teacher->name }}</td>
+                            <td>{{ $teacher->totalStudents()}}</td>
                             <td class="text-center">
-                                <a href="attendance-student-index.html">
+                                <a href="{{ route('index.class.attendance', $teacher->id) }}">
                                     <button class="btn btn-sm text-uppercase btn-primary" type="submit">
-                                        {{-- <i class="fa fa-eye"></i> --}}
+                                       
                                         view
                                     </button>
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -52,13 +55,7 @@
             <div class="row justify-content-end">
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                        </ul>
+                        {{ $teachers->links() }}
                     </nav>
                 </div>
             </div>

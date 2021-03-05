@@ -17,16 +17,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false,]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+/**  Section 1
+* This section is for handling dashboard for admin, teacher, and student.
+* 
+*/
 Route::prefix('dashboard')->group(function () {
     Route::get('admin','DashboardController@admin')->name('admin.dashboard');
     Route::get('teacher','DashboardController@teacher')->name('teacher.dashboard');
     Route::get('student','DashboardController@student')->name('student.dashboard');
 });
 
+/** Section 2
+ * This section is for handling the class index page on admin side for features such as
+ * 1. Attendance ,
+ * 2. Student detail named as detail , 
+ * 3. Statement ,
+ * 4. 
+ * to display the list of class
+ */
 
 Route::prefix('admin')->group(function () {
     Route::prefix('detail')->group(function () {
@@ -40,25 +52,44 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-Route::prefix('adminStudent')->group(function () {
-    Route::get('/index/class/detail/{id}','AdminStudentController@class')->name('index.class.detail');
+/** Section 3
+ * This section is for admin, and
+ * Used for displaying the list of student detail that belongs to a classteacher 
+ * 
+ * it follows the route naming convention "index.class.feature-name" => name('index.class.detail')
+ */
+
+Route::prefix('admin')->group(function () {
+    Route::prefix('class')->group(function () {
+        Route::get('detail/{id}','AdminStudentController@class')->name('index.class.detail');
+        Route::get('attendance/{id}','AdminAttendanceController@class')->name('index.class.attendance');
+        Route::get('statement/{id}','AdminStatementController@class')->name('index.class.statement');
+    });
+    Route::prefix('student')->group(function () {
+        Route::get('statement/{id}','AdminStatementController@student')->name('index.student.statement');
+        Route::get('statement/index/{id}','AdminStatementController@index')->name('index.student.statement.index');
+    });
+   
+
 });
 
-
-
-Route::resource('student','StudentController');
-Route::resource('grade', 'GradeController')->only([
-    'store',
-]);
-Route::resource('division','DivisionController')->only([
-    'store',
-]);
+/** Section 4
+ * this section is for handling various resources
+ */
 Route::resource('class','ClassDivisionController')->only([
     'index',
     'create',
     'store',
     'destroy',
 ]);
+Route::resource('division','DivisionController')->only([
+    'store',
+]);
+Route::resource('grade', 'GradeController')->only([
+    'store',
+]);
+Route::resource('statement','StatementController');
+Route::resource('student','StudentController');
 
 
 

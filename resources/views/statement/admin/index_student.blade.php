@@ -19,29 +19,35 @@
                             <th class="text-center">#</th>
                             <th class="text-left">Student Number</th>
                             <th class="text-left">Name</th>
-                            <th class="text-left">Number of Statement</th>
+                            <th class="text-center">#Statement</th>
                             <th class="text-left">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($students as $student)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>2376821</td>
-                            <td>Choki Wangchuk</td>
-                            <td>1</td>
+                            <td class="text-center">{{ $i++ }}</td>
+                            <td>{{ $student->code }}</td>
+                            <td>{{ $student->name }}</td>
+                            <td class="text-center">{{$student->statementCount() }}</td>
                             <td class="text-dark">
-                                <button class="btn btn-sm btn-primary">
-                                    view
-                                </button>
+                                @if ($student->statementCount() > 0)    
+                                <a href="{{ route('index.student.statement.index', $student->id) }}">
+                                    <button class="btn btn-sm btn-primary">
+                                        view
+                                    </button>
+                                </a>
+                                @endif
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <td class="text-center"><strong>#</strong></td>
                             <td><strong>Student Number</strong></td>
                             <td><strong>Name</strong></td>
-                            <td class="text-left"><strong>Number of Statement</strong></td>
+                            <td class="text-center"><strong>#Statement</strong></td>
                             <td class="text-left"><strong>Actions</strong></td>
                         </tr>
                     </tfoot>
@@ -51,11 +57,7 @@
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                         <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                             {{-- {{ $students->links() }} --}}
                         </ul>
                     </nav>
                 </div>

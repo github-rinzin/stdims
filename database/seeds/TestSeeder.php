@@ -141,12 +141,47 @@ class TestSeeder extends Seeder
         //     'name' => 'Choki Wangchuk',
         //     'class_division_id' => '1',
         // ]);
-        Teacher::create([
+        // User::create([
+        //     'id' => '6',
+        //     'name' => 'Choki Wangchuk',
+        //     'email' => 'choki@sms.edu',
+        //     'password' => Hash::make('password'),
+        //     'role_id' => '3',
+        // ]);
+        // Student::create([
+        //     'id' => '2',
+        //     'code' => '12180005',
+        //     'name' => 'Choki Wangchuk',
+        //     'dob' => '2021-03-02',
+        //     'age' => '21',
+        //     'cid' => '11505000945',
+        //     'name_of_previous_school' => 'Gelephu Higher Seconday School',
+        //     'fathers_name' => 'Ngawang Dorji',
+        //     'fathers_contact' => '17262894',
+        //     'fathers_address' => '123, MTC Street, Gelephu',
+        //     'mothers_name' => 'Sangte',
+        //     'mothers_contact' => '17332378',
+        //     'mothers_address' => '123, MTC Street, Gelpehu',
+        //     'gurdian_name' => 'Ngawang Dorji',
+        //     'gurdian_contact' => '17262894',
+        //     'user_id' => '6',
+        //     'class_division_id' => '2'
+        // ]);
+        Address::create([
             'id' => '2',
-            'user_id' => '3',
-            'name' => 'Jarna',
-            'class_division_id' => '2',
+            'student_id' => '2',
+            'thram_number' => 'MA-50',
+            'house_number' => 'HOUSE-12',
+            'village' => 'khaling',
+            'gewog' => 'bayphug',
+            'dzongkhag' => 'trashiggang'
         ]);
+        // Teacher::create([
+        //     'id' => '2',
+        //     'user_id' => '3',
+        //     'name' => 'Jarna',
+        //     'class_division_id' => '2',
+        // ]);
         
     }
 }

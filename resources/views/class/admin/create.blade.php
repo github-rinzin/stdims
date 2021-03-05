@@ -14,7 +14,7 @@
                     <div class="form-row">
                         <div class="col">
                             <select  name="gradeId" class="form-select form-control form-control-sm" type="text" placeholder="class numeric...." aria-label="Default select example">
-                                <option selected>grade</option>
+                                <option value="empty" selected>grade</option>
                                 @foreach ($grades as $grade) 
                                     <option value="{{ $grade->id}}">{{ $grade->numeric}}</option>
                                 @endforeach
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col">
                             <select name="divisionId" class="form-select form-control form-control-sm"  placeholder="division/section name..." aria-label="Default select example">
-                                <option selected>division</option>
+                                <option value="empty" selected>division</option>
                                 @foreach ($divisions as $division)
                                     <option value="{{ $division->id}}">{{ $division->name}}</option>
                                 @endforeach

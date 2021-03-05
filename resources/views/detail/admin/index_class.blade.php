@@ -26,11 +26,11 @@
                             <td class="text-left">{{ $teacher->classDivision->division->name }}</td>
                             <td>{{ $teacher->name }}</td>
                             <td class="text-center">
-                               <a href="{{ route('index.class.detail', $teacher->id ) }}">
-                                   <button class="btn btn-sm btn-primary">
-                                       view
-                                   </button>
-                               </a>
+                            <a href="{{ route('index.class.detail', $teacher->id ) }}">
+                                <button class="btn btn-sm btn-primary">
+                                    view
+                                </button>
+                            </a>
                             </td>
                         </tr>
                         @endforeach
@@ -49,13 +49,7 @@
             <div class="row justify-content-end">
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                        </ul>
+                       {{ $teachers->links()}}
                     </nav>
                 </div>
             </div>

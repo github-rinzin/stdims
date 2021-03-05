@@ -45,13 +45,23 @@ class ClassDivisionController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->gradeId == "empty" || $request->divisionId == "empty") {
+            return redirect()->route('class.index')->with('msg','Enter valid class and division!');
+        }
+
+        
         $grade = Grade::findOrFail($request->gradeId);
         $division = Division::findOrFail($request->divisionId);
-        $classDivision = new ClassDivision;
-        $classDivision->grade_id = $grade->id;
-        $classDivision->division_id = $division->id;
-        // $classDivision->save();
-        return redirect()->route('class.index')->with('msg','Class Created !');
+        $oldClassDivision = ClassDivision::where('grade_id', $request->gradeId)->where('division_id', $request->divisionId)->get();
+        if( count($oldClassDivision) == 0) {
+            $classDivision = new ClassDivision;
+            $classDivision->grade_id = $grade->id;
+            $classDivision->division_id = $division->id;
+            $classDivision->save();
+            return redirect()->route('class.index')->with('msg','Class Created !');
+        }
+        return redirect()->route('class.index')->with('msg','Class Already Exist !');
+       
     }
 
     /**

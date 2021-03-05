@@ -12,7 +12,7 @@
         @include('components.previous')
     </div>
     <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
-    <div class="card">
+    <div class="card shadow">
         <div class="card-body">
             <div class="card-body">
                 <form>
