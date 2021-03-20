@@ -16,13 +16,11 @@ class ClassDivisionController extends Controller
      */
     public function index()
     {
-        $classDivisions = ClassDivision::paginate(10);
-        
+        $classDivisions = ClassDivision::paginate(10); 
         return view('class.admin.index')
                 ->with('classDivisions', $classDivisions )
                 ->with('i', 1);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +34,6 @@ class ClassDivisionController extends Controller
                 ->with('grades', $grades)
                 ->with('divisions', $divisions);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -58,10 +55,8 @@ class ClassDivisionController extends Controller
             $classDivision->save();
             return redirect()->route('class.index')->with('msg','Class Created !');
         }
-        return redirect()->route('class.index')->with('msg','Class Already Exist !');
-       
+        return redirect()->route('class.index')->with('msg','Class Already Exist !');  
     }
-
     /**
      * Display the specified resource.
      *
@@ -72,7 +67,6 @@ class ClassDivisionController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -104,6 +98,9 @@ class ClassDivisionController extends Controller
      */
     public function destroy(Request $request, ClassDivision $classDivision)
     {
-        
+        return 'deleted';
+        $class = ClassDivision::findOrFail($request->id);
+        $class->delete();
+        return redirect()->back();
     }
 }

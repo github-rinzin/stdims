@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
@@ -38,11 +39,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     public function redirectTo() {
-        if(auth()->user()->is('admin')) {
+        if(Gate::allows('is-admin')) {
             return route('admin.dashboard');
-        } else if(auth()->user()->is('teacher')) {
+        }
+        if(Gate::allows('is-teacher')) {
             return route('teacher.dashboard');
-        } else if (auth()->user()->is('student')) {
+        }
+        if (Gate::allows('is-student')) {
             return route('student.dashboard');
         }
     }

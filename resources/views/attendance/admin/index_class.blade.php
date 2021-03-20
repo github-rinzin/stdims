@@ -3,7 +3,7 @@
 
 <div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Attendance</h3>
+        <h3 class="text-dark mb-0">Class teacher list</h3>
         @include('components.previous')
     </div>
     <div class="card shadow">
@@ -13,7 +13,7 @@
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
-                            <th class="text-left">Class&nbsp;</th>
+                            <th class="text-left">Class/numeric</th>
                             <th class="text-left">Section/Division</th>
                             <th class="text-left">Class Teacher</th>
                             <th class="text-left">Number of Student</th>
@@ -30,12 +30,13 @@
                             <td>{{ $teacher->name }}</td>
                             <td>{{ $teacher->totalStudents()}}</td>
                             <td class="text-center">
+                                @if ($teacher->totalStudents() !=0)  
                                 <a href="{{ route('index.class.attendance', $teacher->id) }}">
                                     <button class="btn btn-sm text-uppercase btn-primary" type="submit">
-                                       
                                         view
                                     </button>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

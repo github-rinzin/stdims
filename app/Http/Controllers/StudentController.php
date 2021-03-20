@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
+use App\Address;
 use App\Student;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -14,26 +15,22 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        if(auth()->user()->is('admin')) {
-
+        if(Gate::allows('is-admin')) {
             # code...
-            
             return view('detail.admin.index');
-
-        } else if (auth()->user()->is('teacher')) {
-
+        } else if (Gate::allows('is-teacher')) {
             # code...
-            $students = Student::where('class_division_id', auth()->user()->teacher->class_division_id)->paginate(10);
+            $students = Student::where('class_division_id', $request->user()->teacher->class_division_id)->paginate(10);
             return view('detail.teacher.index')->with('students', $students);
-
-        } else if (auth()->user()->is('student')) {
-
+        } else if (Gate::allows('is-student')) {
             # code...
-            return redirect()->route('student.show', auth()->user()->student->id);
+            return redirect()->route('student.show', $request->user()->student->id);
+        } else {
+            abort(403);
         }
-        abort(403);
+        
         
     }
 
@@ -55,7 +52,25 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'dob' => 'required',
+            'age' => 'required',
+            'cid' => 'required',
+            'house_number' => 'required',
+            'thram_number' => 'required',
+            'village' => 'village',
+            'gewog' => 'required',
+            'dzongkhag' => 'required',
+            'name_of_previous_school' => 'required',
+            'code' => 'required',
+            'fathers_name' => 'required',
+            'fathers_contact' => 'required',
+            'fathers_address' => 'required',
+            'mothers_name' => 'required',
+            'mothers_contact' => 'required',
+            'mothers_address' => 'required',
+        ]);
     }
 
     /**
@@ -70,26 +85,20 @@ class StudentController extends Controller
         // return dd($student);
         // $student = User::findOrFail( Auth::user()->id )->student;
         
-        
-
-        if(auth()->user()->is('admin')) {
-
+        if(Gate::allows('is-admin')) {
             # code...
             return view('detail.admin.show')->with('student', $student);
 
-        } else if (auth()->user()->is('teacher')) {
-
+        } else if (Gate::allows('is-teacher')) {
             # code...
             return view('detail.teacher.show')->with('student',$student);
            
-        } else if (auth()->user()->is('student')) {
-
+        } else if (Gate::allows('is-student')) {
             # code...
             return view('detail.student.show')->with('student',$student);
         }
         abort(403);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -98,17 +107,18 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        if(auth()->user()->is('admin')) {
+        
+        if(Gate::allows('is-admin')) {
 
             # code...
             return view('detail.admin.edit')->with('student', $student);
 
-        } else if (auth()->user()->is('teacher')) {
+        } else if (Gate::allows('is-teacher')) {
 
             # code...
+            return view('detail.teacher.edit')->with('student', $student);
            
-           
-        } else if (auth()->user()->is('student')) {
+        } else if (Gate::allows('is-student')) {
 
             # code...
             return view('detail.student.edit')->with('student', $student);
@@ -127,8 +137,14 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $student->name = $request->name;
-        $student->save();
+        $student->update($request->all());
+        // $address = Address::findOrFail($student->id);
+        // $address->house_number = $request->house_number;
+        // $address->thram_number = $request->thram_number;
+        // $address->village = $request->village;
+        // $address->gewog = $request->gewog;
+        // $address->dzongkhag = $request->dzongkhag;
+        // $address->update();
         return redirect()->route('student.edit',$student->id)->with('msg','Successfully updated');
     }
 
@@ -140,6 +156,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        User::where('id', $student->user->id)->delete();
+        return redirect()->back()->with('msg', 'deleted');
     }
 }

@@ -59,58 +59,58 @@ class TestSeeder extends Seeder
         //     'grade_id' => '3',
         //     'division_id' => '2'
         // ]);
-        // Role::create([
-        //     'id' => 1,
-        //     'name' => 'admin',
-        // ]);
-        // Role::create([
-        //     'id' => 2,
-        //     'name' => 'teacher',
-        // ]);
-        // Role::create([
-        //     'id' => 3,
-        //     'name' => 'student',
-        // ]);
+        Role::create([
+            'id' => 1,
+            'name' => 'admin',
+        ]);
+        Role::create([
+            'id' => 2,
+            'name' => 'teacher',
+        ]);
+        Role::create([
+            'id' => 3,
+            'name' => 'student',
+        ]);
         
-        // User::create([
-        //     'id' => '1',
-        //     'name' => 'admin',
-        //     'email' => 'admin@sms.edu',
-        //     'password' => Hash::make('password'),
-        //     'role_id' => '1'
-        // ]);
+        User::create([
+            'id' => '3',
+            'name' => 'admin',
+            'email' => 'admin@sms.edu',
+            'password' => Hash::make('password'),
+            'role_id' => '1'
+        ]);
         // User::create([
         //     'id' => '2',
         //     'name' => 'teacher1',
         //     'email' => 'teacher1@sms.edu',
         //     'password' => Hash::make('password'),
-        //     'role_id' => '1'
+        //     'role_id' => '2'
         // ]);
         // User::create([
         //     'id' => '3',
         //     'name' => 'teacher2',
         //     'email' => 'teacher2@sms.edu',
         //     'password' => Hash::make('password'),
-        //     'role_id' => '1'
+        //     'role_id' => '2'
         // ]);
         // User::create([
         //     'id' => '4',
         //     'name' => 'teacher3',
         //     'email' => 'teacher3@sms.edu',
         //     'password' => Hash::make('password'),
-        //     'role_id' => '1'
+        //     'role_id' => '2'
         // ]);
         // User::create([
         //     'id' => '5',
-        //     'name' => 'Rinzin Dorji',
-        //     'email' => 'rinzin@sms.edu',
+        //     'name' => 'Tashi',
+        //     'email' => 'tashi@sms.edu',
         //     'password' => Hash::make('password'),
         //     'role_id' => '3',
         // ]);
         // Student::create([
         //     'id' => '1',
-        //     'code' => '12180038',
-        //     'name' => 'Rinzin Dorji',
+        //     'code' => '12180078',
+        //     'name' => 'Tashi Yoezer',
         //     'dob' => '2021-03-02',
         //     'age' => '21',
         //     'cid' => '11505000945',
@@ -123,7 +123,7 @@ class TestSeeder extends Seeder
         //     'mothers_address' => '123, MTC Street, Wangdue',
         //     'gurdian_name' => 'Ngawang Dorji',
         //     'gurdian_contact' => '17262894',
-        //     'user_id' => '1',
+        //     'user_id' => '5',
         //     'class_division_id' => '1'
         // ]);
         // Address::create([
@@ -154,7 +154,7 @@ class TestSeeder extends Seeder
         //     'name' => 'Choki Wangchuk',
         //     'dob' => '2021-03-02',
         //     'age' => '21',
-        //     'cid' => '11505000945',
+        //     'cid' => '11505000947',
         //     'name_of_previous_school' => 'Gelephu Higher Seconday School',
         //     'fathers_name' => 'Ngawang Dorji',
         //     'fathers_contact' => '17262894',
@@ -167,21 +167,55 @@ class TestSeeder extends Seeder
         //     'user_id' => '6',
         //     'class_division_id' => '2'
         // ]);
-        Address::create([
-            'id' => '2',
-            'student_id' => '2',
-            'thram_number' => 'MA-50',
-            'house_number' => 'HOUSE-12',
-            'village' => 'khaling',
-            'gewog' => 'bayphug',
-            'dzongkhag' => 'trashiggang'
-        ]);
+        // Address::create([
+        //     'id' => '2',
+        //     'student_id' => '2',
+        //     'thram_number' => 'MA-50',
+        //     'house_number' => 'HOUSE-12',
+        //     'village' => 'Khaling',
+        //     'gewog' => 'Bayphug',
+        //     'dzongkhag' => 'Trashigang'
+        // ]);
         // Teacher::create([
         //     'id' => '2',
         //     'user_id' => '3',
         //     'name' => 'Jarna',
         //     'class_division_id' => '2',
         // ]);
-        
+        // User::create([
+        //     'id' => '123',
+        //     'name' => 'Sonam',
+        //     'email' => 'sonam@sms.edu',
+        //     'password' => Hash::make('password'),
+        //     'role_id' => '3',
+        // ]);
+        // Student::create([
+        //     'id' => '123',
+        //     'code' => '12180056',
+        //     'name' => 'Sonam Yoezer',
+        //     'dob' => '2021-03-02',
+        //     'age' => '21',
+        //     'cid' => '115050009789',
+        //     'name_of_previous_school' => 'Bajo Higher Seconday School',
+        //     'fathers_name' => 'Ngawang Dorji',
+        //     'fathers_contact' => '17262894',
+        //     'fathers_address' => '123, MTC Street, Wangdue',
+        //     'mothers_name' => 'singay wangmo',
+        //     'mothers_contact' => '17332378',
+        //     'mothers_address' => '123, MTC Street, Wangdue',
+        //     'gurdian_name' => 'Ngawang Dorji',
+        //     'gurdian_contact' => '17262894',
+        //     'user_id' => '123',
+        //     'class_division_id' => '1'
+        // ]);
+        // Address::create([
+        //     'id' => '123',
+        //     'student_id' => '123',
+        //     'thram_number' => 'MA-50',
+        //     'house_number' => 'HOUSE-12',
+        //     'village' => 'khaling',
+        //     'gewog' => 'bayphug',
+        //     'dzongkhag' => 'trashiggang'
+        // ]);
     }
 }

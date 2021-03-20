@@ -1,15 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container-fluid w-75">
+    @include('components.alert')
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Student</h3>
+        <h3 class="text-dark mb-0">Student list for {{  $teacher->classDivision->grade->numeric.' '.$teacher->classDivision->division->name }}</h3>
         @include('components.previous')
     </div>
-    @if (session('msg'))    
-    <div class="alert alert-success" role="alert" style="margin: 1px;margin-left: 0;margin-right: 0;margin-bottom: 14px;margin-top: -16px;">
-        <span><strong>{{ session('msg') }}</strong>.</span>
-    </div>
-    @endif
     <div class="card shadow">
         <div class="card-header">
             <form class="form-inline mr-auto" target="_self">
@@ -46,14 +42,45 @@
                                 <a href="{{ route('student.show', $student->id) }}" class="btn btn-sm btn-primary">
                                     view
                                 </a>
-                                <button class="btn btn-sm btn-dark delete-student"  data-target="#delete-student-personal-detail" data-toggle="modal">
+                                <button data-action="{{route('student.destroy', $student->id)}}" class="btn btn-sm btn-dark delete-student-admin"  data-target="#delete-student-personal-detail" data-toggle="modal">
                                     delete
                                 </button>
                             </td>
-                        </tr>
-                      
+                        </tr>                      
                         @endforeach
-                     
+                        <script>
+                            $(document).ready(function () {
+                                $('.delete-student-admin').click(function (e) { 
+                                    e.preventDefault();
+                                    let action = $(this).attr('data-action');
+                                    $('.delete-form').attr('action', action);
+                                });
+                                $('.confirm-class-delete').click(function (e) { 
+                                    $('.delete-form').submit();
+                                });
+                            });
+                        </script>
+                        {{-- delete modal - start --}}
+                        <div class="modal fade" role="dialog" tabindex="-1" id="delete-student-personal-detail">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Warning!</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                                    <div class="modal-body">
+                                        <p>You are about to delete the detail permenantly !</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                                        <button  type="submit" class="btn btn-primary btn-sm confirm-class-delete">Confirm, Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- delete modal - end --}}
+                        <form class="delete-form" action="" method="post">
+                            @csrf
+                            @method('delete')
+                        </form>
                        
                     </tbody>
                     <tfoot>
@@ -79,21 +106,5 @@
     </div>
 </div>
 
- {{-- delete modal - start --}}
- <div class="modal fade" role="dialog" tabindex="-1" id="delete-student-personal-detail">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Warning!</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-            <div class="modal-body">
-                <p>You are about to delete the detail permenantly !</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary modal-delete-button"  type="button" >Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- delete modal - end --}}
+ 
 @endsection

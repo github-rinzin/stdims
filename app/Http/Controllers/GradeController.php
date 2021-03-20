@@ -37,6 +37,9 @@ class GradeController extends Controller
     {
         $oldGrade = Grade::where( 'numeric', '=' ,$request->numeric )->get();
         if($oldGrade->isEmpty()){
+            if($request->numeric > 12 || $request->numeric < 0) {
+                return redirect()->back()->with('msg','Enter Grade between 1 - 12');
+            }
             $grade = new Grade;
             $grade->numeric = $request->numeric;
             $grade->save();

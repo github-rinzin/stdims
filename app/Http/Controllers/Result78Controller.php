@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Result_7_8;
 use Illuminate\Http\Request;
+use App\Imports\Result78Import;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Result78Controller extends Controller
 {
@@ -35,7 +37,7 @@ class Result78Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'fine';
     }
 
     /**

@@ -20,9 +20,10 @@
                     </thead>
                     
                     <tbody>
-                        <tr>
-                            <td class="text-center pb-0">1</td>
-                            <td class="pb-0">12</td>
+                        @foreach ($results as $result)
+                         <tr>
+                            <td class="text-center pb-0">{{ $i++ }}</td>
+                            <td class="pb-0">12uu</td>
                             <td class="pb-0">2012</td>
                             <td class="pb-0">
                                 <a href="">
@@ -32,6 +33,7 @@
                                 </a>
                             </td>
                         </tr>  
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>

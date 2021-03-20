@@ -1,11 +1,12 @@
 @extends('layouts.student')
 @section('content')
 <div class="container-fluid w-75">
+    @include('components.alert')
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Personal Details Setting&nbsp;<i class="fa fa-gears"></i></h3>
         @include('components.previous')
     </div>
-    <div class="card">
+    <div class="card shadow">
         <div class="card-body">
             <div class="card-body">
                 <form action="{{ route('student.update', $student->id) }}" method="post">
@@ -130,7 +131,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <button type="submit" value="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary">
                                 Update
                             </button>
                         </div>

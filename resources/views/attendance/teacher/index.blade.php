@@ -19,7 +19,7 @@
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <a href="">
+                    <a href="{{ route('attendance.create') }}">
                         <button class="btn btn-sm btn-primary float-right" type="button">
                             <i class="fas fa-plus"></i>&nbsp;Add&nbsp;
                         </button>
@@ -36,25 +36,27 @@
                             <th>Student Number</th>
                             <th>Student Name</th>
                             <th class="text-center">Status</th>
+                            <th class="text-center">Percentage</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($students as $student) 
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>12180001</td>
-                            <td>Dorji</td>
-                            <td class="text-center">12/12</td>
-                            <td class="text-center">
-                                <a href="attendance-show.html">
-                                    {{-- <i class="fa fa-eye" style="/*font-size: 27px;*//*color: rgb(87,97,201);*/"></i> --}}
-                                    <button class="btn btn-sm btn-primary">
-                                        view
-                                    </button>
-                                </a>
+                            <td>{{ $i++ }}</td>
+                            <td>{{ $student->code}}</td>
+                            <td>{{ $student->name }}</td>
+                            <td>{{ $student->attendanceStatus()['numerator'].'/'.$student->attendanceStatus()['denomerator'] }}</td>
+                            <td class="text-center">{{ $student->attendanceStatus()['percentage'].'%' }} </td>
+                            <td>
+                                <a class="text-center" href="{{ route('teacher.attendance.show', $student->id) }}" style="padding: 11px;">
+                                   <button class="btn btn-sm text-uppercase btn-primary" type="submit">
+                                       view
+                                   </button>
+                               </a>
                             </td>
-                        </tr>    
-                        
+                        </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -62,6 +64,7 @@
                             <th>Student Number</th>
                             <th>Student Name</th>
                             <th class="text-center">Status</th>
+                            <th class="text-center">Percentage</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </tfoot>
@@ -71,11 +74,7 @@
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                         <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            
                         </ul>
                     </nav>
                 </div>

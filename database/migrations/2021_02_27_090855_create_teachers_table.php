@@ -16,9 +16,10 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('class_division_id')->unique();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('class_division_id')->references('id')->on('class_divisions');
+            $table->string('name');
+            $table->unsignedBigInteger('class_division_id')->unique()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('class_division_id')->references('id')->on('class_divisions')->onDelete('SET NULL');
             $table->timestamps();
         });
     }

@@ -1,8 +1,9 @@
 @extends('layouts.teacher')
 @section('content')
 <div class="container-fluid w-75">
+    @include('components.alert')
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Unapproved Student <span class="badge badge-secondary"> 12 </span> </h3>
+        <h3 class="text-dark mb-0">Unapproved Student <span class="badge badge-secondary"> {{ $join_reqs->count()}} </span> </h3>
         @include('components.previous')
     </div>
     <div class="card shadow">
@@ -18,26 +19,34 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($join_reqs as $item)    
                         <tr>
                             <td class="text-center">1</td>
-                            <td>12180031</td>
                             <td>
-                                Pema Namgay
+                                {{ $item->student->code}}
                             </td>
-                            <td class="text-center">
-                                <a href="#">
-                                    <button class="btn btn-sm btn-success">
+                            <td>
+                                {{ $item->student->name}}
+                            </td>
+                            <form action="{{ route('join.approve') }}" method="post">
+                                @csrf
+                                <input class="d-none" type="text" name="class_id" value="{{ $item->class_division_id }}">
+                                <input class="d-none" type="text" name="student_id" value="{{ $item->student_id }}">
+                                <input  class="d-none"type="text" name="request_id" value="{{ $item->id }}">
+                                <td class="text-center">
+                                    <button type="submit" class="btn btn-sm btn-success">
                                         approve
                                     </button>
-                                </a>
-                                <a href="#">
-                                    <button class="btn btn-sm btn-danger">
-                                        reject
-                                    </button>
-                                </a>
-                                
+                            </form>
+                            <form action="{{ route('join.destroy', $item->id) }}" method="post">
+                                @csrf
+                                <button class="btn btn-sm btn-danger">
+                                    reject
+                                </button>
+                            </form>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -53,11 +62,7 @@
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                         <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            {{ $join_reqs->links() }}
                         </ul>
                     </nav>
                 </div>

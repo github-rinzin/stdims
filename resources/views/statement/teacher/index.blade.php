@@ -8,11 +8,6 @@
         @include('components.previous') 
     </div>
     <div class="card shadow">
-        <div class="card-header">
-            <div class="card-text">
-                <p class="align-baseline">Student Name: Dorji&nbsp;</p>
-            </div>
-        </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
@@ -25,18 +20,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        @foreach ($statements as $statement)   
                         <tr>
-                            <td class="text-center">03</td>
-                            <td>Fighting</td>
-                            <td>2/FEB/2021</td>
+                            <td class="text-center">{{ $i++ }}</td>
+                            <td>{{ $statement->subject}}</td>
+                            <td>{{ $statement->created_at->format('Y-m-d')}}</td>
                             <td class="text-center">
-                                <a class="text-center text-dark" href="statement-show.html" >
-                                    {{-- <i class="fa fa-eye"></i> --}}
-                                    <button class="btn btn-sm btn-primary">view</button>
+                                <a class="text-center text-dark" href="{{ route('statement.show', $statement->id ) }}" >
+                                   <button class="btn btn-sm btn-primary">view</button>
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Statement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StatementController extends Controller
 {
@@ -14,17 +15,20 @@ class StatementController extends Controller
      */
     public function index()
     {
-        
+       if(Auth::user()->is('student')){
+           $statements = Statement::where('student_id', Auth::user()->student->id)->paginate(2);
+           return view('statement.student.index')->with('statements', $statements)->with('i',1);
+       }
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new statement.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('statement.student.create');
     }
 
     /**
@@ -35,9 +39,14 @@ class StatementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $statement = new Statement;
+       $statement->subject = $request->subject;
+       $statement->content = $request->content;
+       $statement->student_id = Auth::user()->student->id;
+       $statement->save();
+       return redirect()->route('statement.index')->with('msg', 'Submitted Successfully');
     }
-
+ 
     /**
      * Display the specified resource.
      *
@@ -45,8 +54,15 @@ class StatementController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Statement $statement)
-    {
-        return view('statement.admin.show')->with('statement', $statement);
+    {  
+        if(Auth::user()->is('teacher')){
+            return view('statement.teacher.show')->with('statement', $statement);
+        } else if(Auth::user()->is('admin')) {
+            return view('statement.admin.show')->with('statement', $statement);
+        }
+        else if(Auth::user()->is('student')){
+            return view('statement.student.show')->with('statement',$statement);
+        }
     }
 
     /**

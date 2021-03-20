@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Attendance</h3>
+        <h3 class="text-dark mb-0">Student Attendance list for class {{ $teacher->classDivision->grade->numeric.' '. $teacher->classDivision->division->name}}</h3>
         @include('components.previous')
     </div>
     <div class="card shadow">
@@ -20,6 +20,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($students->isEmpty())
+                        @else  
                         @foreach ($students as $student) 
                         <tr>
                             <td>{{ $i++ }}</td>
@@ -28,14 +30,17 @@
                             <td>{{ $student->attendanceStatus()['numerator'].'/'.$student->attendanceStatus()['denomerator'] }}</td>
                             <td class="text-center">{{ $student->attendanceStatus()['percentage'].'%' }} </td>
                             <td>
-                                <a class="text-center" href="" style="padding: 11px;">
+                                @if ($student->attendanceStatus()['denomerator'] != 0)
+                                <a class="text-center" href="{{ route('index.student.attendance', $student->id)}}" style="padding: 11px;">
                                     <button class="btn btn-sm text-uppercase btn-primary" type="submit">
                                         view
                                     </button>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                     <tfoot>
                         <tr>

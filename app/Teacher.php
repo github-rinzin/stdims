@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\ClassDivision;
 use App\Student;
+use App\statement;
 
 class Teacher extends Model
 {
@@ -16,6 +17,9 @@ class Teacher extends Model
     }
     public function classDivision() {
         return $this->belongsTo(classDivision::class);
+    }
+    public function statements() {
+        return $this->hasMany(Statement::class);
     }
     // public function attendancesOfTeacher() {
     //     return Attendance::where('teacher_id', $this->id);

@@ -11,13 +11,13 @@
             <div class="card-header ">
                 <div class="card-text float-right">
                     <div class="card-title">
-                        12/FEB/2021
+                        {{ $statement->created_at->translatedFormat('l j F Y')}}
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="form-group"><label>Subject</label><input class="form-control" type="text" readonly="" disabled=""></div>
-                <div class="form-group"><label>Content</label><textarea class="form-control" disabled="" readonly="" rows="10"></textarea></div>
+                <div class="form-group"><label>Subject</label><input class="form-control" value="{{ $statement->subject}}"type="text" readonly="" disabled=""></div>
+                <div class="form-group"><label>Content</label><textarea class="form-control"  disabled="" readonly="" rows="10">{{ $statement->content}}</textarea></div>
             </div>
         </div>
     </form>

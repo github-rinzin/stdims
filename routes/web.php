@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatementController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudenttController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,201 +19,113 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes(['register' => false,]);
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 /**  Section 1
-* This section is for handling dashboard for admin, teacher, and student.
-* 
-*/
-Route::prefix('dashboard')->group(function () {
-    Route::get('admin','DashboardController@admin')->name('admin.dashboard');
-    Route::get('teacher','DashboardController@teacher')->name('teacher.dashboard');
-    Route::get('student','DashboardController@student')->name('student.dashboard');
-});
-
-/** Section 2
- * This section is for handling the class index page on admin side for features such as
- * 1. Attendance ,
- * 2. Student detail named as detail , 
- * 3. Statement ,
- * 4. 
- * to display the list of class
- */
-
-Route::prefix('admin')->group(function () {
-    Route::prefix('detail')->group(function () {
-        Route::get('class', 'AdminController@detail')->name('admin.detail.class');
-    });
-    Route::prefix('attendance')->group(function () {
-        Route::get('class', 'AdminController@attendance')->name('admin.attendance.class');
-    });
-    Route::prefix('statement')->group(function () {
-        Route::get('class', 'AdminController@statement')->name('admin.statement.class');
-    });
-    Route::prefix('result')->group(function() {
-        Route::get('class', 'AdminController@result')->name('admin.result.class');
-    });
-});
-
-/** Section 3
- * This section is for admin, and
- * Used for displaying the list of student detail that belongs to a classteacher 
+ * This section is for handling dashboard for admin, teacher, and student.
  * 
- * it follows the route naming convention "index.class.feature-name" => name('index.class.detail')
  */
+Route::middleware(['auth'])->group(function() {
+    Route::prefix('dashboard')->group(function () {
+        Route::get('admin','DashboardController@admin')->name('admin.dashboard');
+        Route::get('teacher','DashboardController@teacher')->name('teacher.dashboard');
+        Route::get('student','DashboardController@student')->name('student.dashboard');
+    });
+    /** Section 2
+     * This section is for handling the class index page on admin side for features such as
+     * 1. Attendance ,
+     * 2. Student detail named as detail , 
+     * 3. Statement ,
+     * 4. 
+     * to display the list of class
+     */
+    Route::middleware(['can:is-admin'])->prefix('admin')->group(function () {
+        Route::prefix('detail')->group(function () {
+            Route::get('class', 'Admin\AdminController@detail')->name('admin.detail.class');
+        });
+        Route::prefix('attendance')->group(function () {
+            Route::get('class', 'Admin\AdminController@attendance')->name('admin.attendance.class');
+            Route::get('{id}','Admin\AdminAttendanceController@student')->where('id', '[0-9]+')->name('index.student.attendance');
+        });
+        Route::prefix('statement')->group(function () {
+            Route::get('class', 'Admin\AdminController@statement')->name('admin.statement.class');
+        });
+        Route::prefix('result')->group(function() {
+            Route::get('class', 'Admin\AdminController@result')->name('admin.result.class');
+        });
 
-Route::prefix('admin')->group(function () {
-    Route::prefix('class')->group(function () {
-        Route::get('detail/{id}','AdminStudentController@class')->name('index.class.detail');
-        Route::get('attendance/{id}','AdminAttendanceController@class')->name('index.class.attendance');
-        Route::get('statement/{id}','AdminStatementController@class')->name('index.class.statement');
-        Route::get('result/{id}','AdminResultController@class')->name('index.class.result');
+        /** Section 3
+         * This section is for admin, and
+         * Used for displaying the list of student detail that belongs to a classteacher 
+         * 
+         * it follows the route naming convention "index.class.feature-name" => name('index.class.detail')
+         */
+        Route::prefix('class')->group(function () {
+            Route::get('detail/{id}','Admin\AdminStudentController@class')->name('index.class.detail');
+            Route::get('attendance/{id}','Admin\AdminAttendanceController@class')->name('index.class.attendance');
+            Route::get('statement/{id}','Admin\AdminStatementController@class')->name('index.class.statement');
+            Route::get('result/{id}','Admin\AdminResultController@class')->name('index.class.result');
+        });
+        Route::prefix('student')->group(function () {
+            Route::get('statement/{id}','Admin\AdminStatementController@student')->name('index.student.statement');
+            Route::get('statement/index/{id}','Admin\AdminStatementController@index')->name('index.student.statement.index');
+
+        });
     });
-    Route::prefix('student')->group(function () {
-        Route::get('statement/{id}','AdminStatementController@student')->name('index.student.statement');
-        Route::get('statement/index/{id}','AdminStatementController@index')->name('index.student.statement.index');
+    /**
+     * This section is for teacher 
+     */
+    Route::middleware(['can:is-teacher'])->prefix('teacher')->group(function (){
+        Route::prefix('attendance')->group(function (){ 
+            Route::get('/','Teacher\TeacherAttendanceController@index')->name('teacher.attendance.index');
+            Route::get('show/{id}','Teacher\TeacherAttendanceController@show')->name('teacher.attendance.show');
+        });
+        Route::prefix('statement')->group(function (){
+            Route::get('student/','Teacher\TeacherStatementController@student')->name('teacher.statement.student');
+            Route::get('student/{id}','Teacher\TeacherStatementController@index')->name('teacher.statement');
+        });
+        Route::get('join', 'JoinController@index')->name('join.index');
+        Route::post('join', 'JoinController@approve')->name('join.approve');
+
+        Route::get('result','ResultController@index')->name('result.index');
+        Route::post('result','ResultController@store')->name('result.store');
     });
+    Route::middleware(['can:is-student'])->prefix('student')->group(function(){
+        Route::get('join', 'JoinController@create')->name('join.create');
+        Route::post('join', 'JoinController@store')->name('join.store');
+        Route::post('join/{joinreq}', 'JoinController@destroy')->name('join.destroy');
+    });
+    /**
+     * Bulk Upload section
+     */
+    Route::middleware('can:is-admin')->prefix('bulk')->group(function(){
+        Route::post('/student','Admin\Bulk\StudentController@store')->name('bulk.student.store');
+    });
+    /** Section 4
+     * this section is for handling various resources
+     */
+    Route::resource('attendance','AttendanceController')->except([
+        'show',
+        'edit',
+        'destroy',
+    ]);
+    Route::middleware('can:is-admin')->group(function(){
+        Route::resource('class','ClassDivisionController')->only([
+            'index',
+            'create',
+            'store',
+            'destroy',
+        ]);
+        Route::resource('division','DivisionController')->only([
+            'store',
+        ]);
+        Route::resource('grade', 'GradeController')->only([
+            'store',
+        ]);    
+        Route::resource('teacher', 'TeacherController');
+    });
+    Route::resource('result78','Result78Controller');      
+    Route::resource('student','StudentController');
+    Route::resource('statement','StatementController');
 });
-
-/** Section 4
- * this section is for handling various resources
- */
-Route::resource('class','ClassDivisionController')->only([
-    'index',
-    'create',
-    'store',
-    'destroy',
-]);
-Route::resource('division','DivisionController')->only([
-    'store',
-]);
-Route::resource('grade', 'GradeController')->only([
-    'store',
-]);
-Route::resource('statement','StatementController');
-Route::resource('student','StudentController');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// /*******************************************************
-//  * 
-//  * 
-//  *   PLEASE USE THE SECTION BELOW TO TEST THE LAYOUT
-//  * 
-//  * 
-//  * 
-// *******************************************************/
-
-// /*************************************************************************************************************************************/
-// /*****************************  THIS SECTION IS FOR ADMIN ****************************************************************************/
-// /*************************************************************************************************************************************/
-
-// Route::prefix('admin')->group(function () {
-//    Route::view('dashboard','dashboard.admin.dashboard');
-//    Route::view('attendance/show','attendance.admin.show');
-//    Route::view('attendance/student','attendance.admin.index_student');
-//    Route::view('attendance/class','attendance.admin.index_class');
-//    Route::view('class/create','class.admin.create');
-//    Route::view('class','class.admin.index');
-//    Route::view('detail/class/','detail.admin.index_class');
-//    Route::view('detail/class/student/','detail.admin.index');
-//    Route::view('detail/student/edit','detail.admin.edit');
-//    Route::view('detail/student/show','detail.admin.show');
-//    Route::view('statement/','statement.admin.index');
-//    Route::view('statement/class/','statement.admin.index_class');
-//    Route::view('statement/student/','statement.admin.index_student');
-//    Route::view('statement/show','statement.admin.show');
-// });
-
-
-
-
-// /*************************************************************************************************************************************/
-// /****************************  THIS SECTION IS FOR TEACHER ***************************************************************************/
-// /*************************************************************************************************************************************/
-
-// Route::prefix('teacher')->group(function () {
-//     Route::view('attendance','attendance.teacher.index');
-//     Route::view('attendance/show','attendance.teacher.show');
-//     Route::view('attendance/create','attendance.teacher.create');
-//     Route::view('class','class.teacher.index');
-//     Route::view('dashboard','dashboard.teacher.index');
-//     Route::view('result','result.teacher.index');
-//     Route::view('statement','statement.teacher.index');
-//     Route::view('statement/student','statement.teacher.student_index');
-//     Route::view('statement/show','statement.teacher.show');
-//     Route::view('detail','detail.teacher.index');
-//     Route::view('detail/show','detail.teacher.show');
-//     Route::view('detail/edit','detail.teacher.edit');
-// });
-
-
-// /*************************************************************************************************************************************/
-// /*****************************  THIS SECTION IS FOR STUDENT **************************************************************************/
-// /*************************************************************************************************************************************/
-
-// Route::prefix('student')->group(
-//     function () {  
-//         Route::view('/attendance','attendance.student.index');
-//         Route::view('/detail','detail.student.index');
-//         Route::view('/detail/edit','detail.student.edit');
-//         Route::view('/result','result.student.index');
-//         Route::view('/result/show','result.student.show');
-//         Route::view('/statement','statement.student.index');
-//         Route::view('/statement/create','statement.student.create');
-//         Route::view('/statement/show','statement.student.show');
-//         Route::view('/class/create','class.student.create'); 
-//     }
-// );
-
-
-
-
-
-// /*************************************************************************************************************************************/
-// /*************************************************************************************************************************************/
-// /*************************************************************************************************************************************/
+                

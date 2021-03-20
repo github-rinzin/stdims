@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Teacher;
+use App\Student;
+use App\User;
+use App\Grade;
+use App\Division;
+use App\ClassDivision;
 
 class TeacherController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+     public function index()
     {
-        //
+        $teachers = Teacher::paginate(10);
+        return view('teacher.index')->with('teachers', $teachers)->with('i', 1);
     }
 
     /**
@@ -24,7 +34,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        $class = ClassDivision::all();
+        return view('teacher.create')->with('class', $class);
     }
 
     /**
@@ -35,7 +46,24 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $teacher = new Teacher;
+
+        $user->id = $request->id;
+        $user->name = $request->username;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role_id = 2;
+        $class_division_id  =$request->class_division_id;
+        // return $class_division_id;
+        $teacher->user_id = $request->id;
+        $teacher->class_division_id = $class_division_id;
+        $teacher->name = $request->name;
+        // return dd([ 'teacher' => $teacher, 'user' =>$user ]);
+       
+        $user->save();
+        $teacher->save();
+        return redirect()->route('teacher.index')->with('msg', 'Class Teacher account created successfully');
     }
 
     /**
@@ -80,6 +108,9 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $user = User::findOrFail($teacher->user->id);
+        $teacher->delete();
+        $user->delete();
+        return redirect()->route('teacher.index')->with('msg', 'Class Teacher deleted successfully');
     }
 }

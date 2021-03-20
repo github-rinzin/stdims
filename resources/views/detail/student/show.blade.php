@@ -21,10 +21,19 @@
                             <div class="form-group"><span>Name</span><input class="border rounded border-white form-control" type="text" disabled="" readonly="" value="{{ $student->name}}"></div>
                         </div>
                         <div class="col">
-                            <div class="form-group"><span>Class/Grade</span><input class="border-white form-control" type="text" disabled="" readonly="" value="{{ $student->classDivision->grade->numeric }}"></div>
+                            <div class="form-group"><span>Class/Grade</span><input class="border-white form-control" type="text" disabled="" readonly="" 
+                                @if (Auth::user()->student->class_division_id != null)
+                                    value="{{ $student->classDivision->grade->numeric }}"
+                                @endif
+                            ></div>
                         </div>
                         <div class="col">
-                            <div class="form-group"><span>Section/Division/Stream</span><input class="border-white form-control" type="text" disabled="" readonly="" value="{{ $student->classDivision->division->name }}"></div>
+                            <div class="form-group"><span>Section/Division/Stream</span><input class="border-white form-control" type="text" disabled="" readonly="" 
+                               @if (Auth::user()->student->class_division_id != null)
+                                   
+                               value="{{ $student->classDivision->division->name }}"
+                               @endif
+                            ></div>
                         </div>
                     </div>
                     <div class="form-row">

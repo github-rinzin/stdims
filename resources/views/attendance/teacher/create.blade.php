@@ -6,16 +6,18 @@
     <h3 class="text-dark mb-0">Attendance</h3>
     @include('components.previous')
 </div>
-<form>
-    <div class="card shadow">
-        <div class="card-header ">
-            <div class="m-0 p-0 form-group form-inline">
-                <label>Attendance for :&nbsp;&nbsp;</label>
-                <input class="form-control" type="date">
-            </div>
+<form action="{{ route('attendance.store') }}" method="POST">
+    @csrf
+    @method('post')
+<div class="card shadow">
+    <div class="card-header ">
+        <div class="m-0 p-0 form-group form-inline">
+            <label>Attendance for :&nbsp;&nbsp;</label>
+            <input name="date" class="form-control" type="date" required>
         </div>
-        <div class="card-body">
-            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+    </div>
+    <div class="card-body">
+        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
@@ -26,14 +28,26 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($students as $student)
+                        <input type="hidden" name="student_id[]" value="{{ $student->id}}">
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>12180038</td>
-                            <td>Rinzin Dorji</td>
+                            <td class="text-center">{{ $i++ }}</td>
+                            <td>{{ $student->code }}</td>
+                            <td>{{ $student->name }}</td>
                             <td class="text-center">
-                                <input type="checkbox" style="margin-left: 0px;" checked="">
+                                <input type="hidden" name="status[]" value="true">
+                                <input  class="ml-0" type="checkbox"  checked>
                             </td>
+                            <script>
+                            $(document).ready(function () {
+                                $('input[type=checkbox]').on('change', function() {
+                                    let value = $(this).is(':checked');
+                                    $(this).prev('input[type=hidden]').val(value);
+                                });
+                            });
+                            </script>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -47,7 +61,7 @@
             </div>
             <div class="form-row">
                 <div class="col-md-12">
-                    <button class="float-right btn btn-sm btn-primary" type="button">
+                    <button class="float-right btn btn-sm btn-primary" type="submit">
                         Submit
                     </button>
                 </div>

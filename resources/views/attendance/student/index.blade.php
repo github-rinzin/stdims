@@ -10,6 +10,12 @@
             <p class="text-primary m-0 font-weight-bold">Attandance Information</p>
         </div>
         <div class="card-body">
+            @if($attendances->isEmpty())
+               <div class="card-header">
+                   <h1 class="card-title">NO RECORDS</h1>
+               </div>
+               @else
+               
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
                     <thead>
@@ -21,12 +27,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($attendances as $attendance)
                         <tr>
-                            <td>1</td>
-                            <td>Monday</td>
-                            <td>12/10/2021</td>
-                            <td class="text-center">P</td>
+                            <td>{{ $i++}}</td>
+                            <td>{{ $attendance->created_at->translatedFormat('l')}}</td>
+                            <td>{{ $attendance->created_at->format('d-m-Y')}}</td>
+                            <td class="text-center">
+                                @if ($attendance->status=='true')
+                                    Present
+                                @else
+                                    Absent
+                                @endif
+                            </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -38,16 +52,13 @@
                     </tfoot>
                 </table>
             </div>
+            @endif
             <div class="row">
                 <div class="col-md-6"></div>
                 <div class="col">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                         <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                           {{ $attendances->links()}}
                         </ul>
                     </nav>
                 </div>

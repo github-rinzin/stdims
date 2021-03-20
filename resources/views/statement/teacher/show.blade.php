@@ -8,8 +8,8 @@
     <div class="card shadow">
         <div class="card-body">
             <form>
-                <div class="form-group"><label>Subject</label><input class="form-control border-0" type="text" readonly="" disabled=""></div>
-                <div class="form-group"><label>Content</label><textarea class="form-control form-control-lg border-0" readonly="" rows="10" disabled=""></textarea></div>
+                <div class="form-group"><label>Subject</label><input class="form-control border-0" type="text" readonly="" disabled="" value="{{ $statement->subject}}"></div>
+                <div class="form-group"><label>Content</label><textarea class="form-control form-control-lg border-0" readonly="" rows="10" disabled="">{{$statement->content}}</textarea></div>
             </form>
         </div>
     </div>

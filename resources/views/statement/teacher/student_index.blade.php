@@ -27,18 +27,23 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($students as $student)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>12180080</td>
-                            <td>Choki Wangchuk</td>
-                            <td>1</td>
-                            <td class="text-center">
-                                <a class="" href="" >
-                                    {{-- <i class="fa fa-eye" style="/*color: black;*/"></i> --}}
-                                    <button class="btn btn-sm btn-primary">view</button>
+                            <td class="text-center">{{ $i++ }}</td>
+                            <td>{{ $student->code }}</td>
+                            <td>{{ $student->name }}</td>
+                            <td class="text-center">{{$student->statementCount() }}</td>
+                            <td class="text-dark">
+                                @if ( $student->statementCount() > 0)    
+                                <a href="{{ route('teacher.statement', $student->id) }}">
+                                    <button class="btn btn-sm btn-primary">
+                                        view
+                                    </button>
                                 </a>
+                                @endif
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -55,11 +60,7 @@
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                         <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            {{ $students->links() }}
                         </ul>
                     </nav>
                 </div>

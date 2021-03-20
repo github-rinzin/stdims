@@ -15,11 +15,11 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('code');
+            $table->unsignedBigInteger('code')->unique();
             $table->string('name');
             $table->date('dob');
             $table->integer('age');
-            $table->unsignedBigInteger('cid');
+            $table->unsignedBigInteger('cid')->unique();
             $table->string('name_of_previous_school');
             $table->string('fathers_name');
             $table->integer('fathers_contact');
@@ -30,8 +30,11 @@ class CreateStudentsTable extends Migration
             $table->string('gurdian_name');
             $table->integer('gurdian_contact');
 
+            $table->unsignedBigInteger('class_division_id')->nullable();
+            $table->foreign('class_division_id')->references('id')->on('class_divisions')->onDelete('SET NULL');
+
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             
             $table->timestamps();
         });
