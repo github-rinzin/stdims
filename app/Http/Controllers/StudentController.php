@@ -59,7 +59,7 @@ class StudentController extends Controller
             'cid' => 'required',
             'house_number' => 'required',
             'thram_number' => 'required',
-            'village' => 'village',
+            'village' => 'required',
             'gewog' => 'required',
             'dzongkhag' => 'required',
             'name_of_previous_school' => 'required',
@@ -82,9 +82,6 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         // this section is for student
-        // return dd($student);
-        // $student = User::findOrFail( Auth::user()->id )->student;
-        
         if(Gate::allows('is-admin')) {
             # code...
             return view('detail.admin.show')->with('student', $student);
@@ -138,13 +135,13 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $student->update($request->all());
-        // $address = Address::findOrFail($student->id);
-        // $address->house_number = $request->house_number;
-        // $address->thram_number = $request->thram_number;
-        // $address->village = $request->village;
-        // $address->gewog = $request->gewog;
-        // $address->dzongkhag = $request->dzongkhag;
-        // $address->update();
+        $address = Address::where('student_id',$student->id)->first();
+        $address->house_number = $request->house_number;
+        $address->thram_number = $request->thram_number;
+        $address->village = $request->village;
+        $address->gewog = $request->gewog;
+        $address->dzongkhag = $request->dzongkhag;
+        $address->update();
         return redirect()->route('student.edit',$student->id)->with('msg','Successfully updated');
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container-fluid w-75">
+<div class="container-fluid">
     @include('components.alert')
 
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
@@ -16,7 +16,7 @@
         </div>
         <div class="card-body container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                         <table class="table table-sm table-bordered dataTable my-0 " id="dataTable">
                             <thead>
@@ -24,84 +24,78 @@
                                     <th class="text-center">#</th>
                                     <th class="text-left">Class</th>
                                     <th class="text-left">Section</th>
+                                    <th class="text-left">Stream</th>
+                                    <th class="text-left">Class Teacher</th>
+                                    <th class="text-left">Total student</th>
+                                    <th class="text-capitalize">actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($classDivisions as $classDivision)
                                     
-                                <tr>
+                                <tr class="text-capitalize">
                                     <td class="text-center">{{ $i++ }}</td>
                                     <td>{{ $classDivision->grade->numeric }}</td>
                                     <td>{{ $classDivision->division->name }}</td>
-                                    {{-- <td class="text-center">
-                                        <button id="{{$classDivision->id}}" type="button" class="btn btn-sm btn-dark delete-button" data-href="{{route('class.destroy', $classDivision->id)}}" data-toggle="modal" data-target="#exampleModal">
-                                            <i class="far fa-trash-alt"></i> &nbsp; delete
-                                        </button>
-                                    </td> --}}
-                                </tr>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation !</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Please confirm to delete.
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
-                                            
-                                            <form action="{{route('class.destroy', $classDivision->id)}}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <input type="hidden" name="id" value="{{$classDivision->id}}">
-                                                <button id="confirm-class-delete" type="submit" class="btn btn-primary btn-sm">Confirm, Delete</button>
-                                            </form>    
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>                                
+                                    
+                                    @if ($classDivision->stream_id != null)
+                                        <td>
+                                            {{$classDivision->stream->name}}
+                                        </td>
+                                    @else
+                                        <td class="">
+                                            NA
+                                        </td>
+                                    @endif
+                                    
+                                    @if ($classDivision->teacher != null)
+                                        <td>
+                                            {{$classDivision->teacher->name}}
+                                        </td>
+                                    @else
+                                    <td class="">
+                                       NA
+                                    </td>
+                                    @endif
+                                    
+                                    @if ($classDivision->teacher != null )
+                                        <td>
+                                            {{$classDivision->teacher->totalStudents() }}
+                                        </td>
+                                    @else
+                                        <td class="">
+                                            NA
+                                        </td>
+                                    @endif
+
+                                    @if ($classDivision->teacher != null && $classDivision->teacher->totalStudents() != 0)
+                                        <td>
+                                            <a class="btn btn-sm btn-primary" href="{{route('index.class.detail', $classDivision->teacher->id)}}">detail</a>
+                                        </td>
+                                    @else
+                                        <td class="">
+                                            NA
+                                        </td>
+                                    @endif
+
+                                </tr>                            
                                 @endforeach
-                                {{-- <script>
-                                    $.ajaxSetup({
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                        }
-                                    });
-                                    $(document).ready(function () {
-                                        $('.delete-button').click(function (e) { 
-                                            e.preventDefault();
-                                            $.ajax({
-                                                url: $(this).attr('data-href'),
-                                                type: 'DELETE',
-                                                data : {
-                                                    "id": $(this).attr('id')
-                                                },
-                                                success: function (response) {
-                                                    alert(response);
-                                                }
-                                            });
-                                        });
-                                    });
-                                    </script> --}}
-                                
-                                <!-- Modal -->
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td class="text-center"><strong>#</strong></td>
                                     <td class="text-left"><strong>Class</strong></td>
                                     <td class="text-left"><strong>Section</strong></td>
-                                    {{-- <td class="text-center"><strong>Actions</strong></td> --}}
+                                    <th class="text-left">Stream</th>
+                                    <th class="text-left">Class Teacher</th>
+                                    <th class="text-left">Total student</th>
+                                    <th>Actions</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>   
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <form action="{{ route('grade.store') }}" method="POST"> 
                         @csrf
                         <div class="mb-3">

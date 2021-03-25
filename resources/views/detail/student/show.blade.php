@@ -30,8 +30,7 @@
                         <div class="col">
                             <div class="form-group"><span>Section/Division/Stream</span><input class="border-white form-control" type="text" disabled="" readonly="" 
                                @if (Auth::user()->student->class_division_id != null)
-                                   
-                               value="{{ $student->classDivision->division->name }}"
+                                    value="{{ $student->classDivision->division->name }}"
                                @endif
                             ></div>
                         </div>

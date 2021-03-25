@@ -34,8 +34,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        $class = ClassDivision::all();
-        return view('teacher.create')->with('class', $class);
+        $classDivisions = ClassDivision::all();
+        return view('teacher.create')->with('classDivisions', $classDivisions);
     }
 
     /**

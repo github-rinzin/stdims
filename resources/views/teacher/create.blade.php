@@ -74,9 +74,14 @@
                             <div class="form-group">
                                 <label for="">Class</label>
                                 <select  name="class_division_id" class="form-select form-control form-control-sm " type="text" placeholder="class" aria-label="Default select example">
-                                    <option value="empty" selected>Class numeric/Division name</option>
-                                    @foreach ($class as $item) 
-                                        <option class="text-capitalize" value="{{ $item->id}}">{{ $item->grade->numeric.'    '.$item->division->name }}</option>
+                                    <option value="empty" selected>grade/division/stream</option>
+                                    @foreach ($classDivisions as $class) 
+                                        <option class="text-capitalize" value="{{ $class->id}}">
+                                            {{ $class->grade->numeric.'    '.$class->division->name}}
+                                            @if ($class->stream_id != null )
+                                                {{$class->stream->name }}
+                                            @endif
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid w-75 ">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Result</h3>
+        <h3 class="text-dark mb-0">Class Teacher List</h3>
         @include('components.previous')
     </div>
     <div class="card shadow">

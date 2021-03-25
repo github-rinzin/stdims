@@ -33,8 +33,7 @@ class StudentImport implements ToModel, WithHeadingRow
             'gurdian_name'              => $row['gurdian_name'],
             'gurdian_contact'           => $row['gurdian_contact'],
             'class_division_id'         => null,
-            'user_id'                   => $student_code, 
-            'role_id'                   => 3,   
+            'user_id'                   => $student_code,   
         ]);
     }
 }

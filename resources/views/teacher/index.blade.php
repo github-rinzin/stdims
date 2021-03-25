@@ -19,6 +19,7 @@
                             <th>Name</th>
                             <th>Grade</th>
                             <th>Section</th>
+                            <th>Stream</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -30,8 +31,14 @@
                             <td class="text-capitalize">{{ $teacher->name }}</td>
                             <td>{{ $teacher->ClassDivision->grade->numeric }}</td>
                             <td>{{ $teacher->classDivision->division->name  }}</td>
+                            <td class="text-capitalize">
+                                @if ($teacher->classDivision->stream != null)
+                                    {{ $teacher->classDivision->stream->name }} 
+                                @else 
+                                    {{ __("N/A") }}
+                                @endif
+                            </td>
                             <th>
-                            
                             <form action="{{ route('teacher.destroy', $teacher->id) }}" method="post">
                                 @csrf
                                 @method('delete')
@@ -42,8 +49,6 @@
                             </th>
                         </tr>
                         @endforeach
-                   
-                    
                     </tbody>
                     <tfoot>
                         <tr>
@@ -51,6 +56,7 @@
                             <td><strong>Name</strong></td>
                             <td><strong>Grade</strong></td>
                             <td><strong>Section</strong></td>
+                            <th>Stream</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>

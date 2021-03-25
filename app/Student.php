@@ -6,25 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    protected $fillable = [
-            'id',
-            'code',
-            'name',
-            'dob',
-            'age',
-            'cid',
-            'name_of_previous_school',
-            'fathers_name',
-            'fathers_contact',
-            'fathers_address',
-            'mothers_name',
-            'mothers_contact',
-            'mothers_address',
-            'gurdian_name',
-            'gurdian_contact',
-            'user_id',
-
-    ];
+    protected $guarded = [];
     public function address() {
         return $this->hasOne(Address::class);
     }
@@ -61,6 +43,7 @@ class Student extends Model
     public function joinReq() {
         return $this->hasOne(JoinRequest::class);
     }
+    
     public function attendanceStatus() {         
         $numerator =  Attendance::where('student_id', $this->id)->whereYear('created_at', date('Y'))->where('status', "true")->count();
         $denomerator = Attendance::where('student_id', $this->id)->whereYear('created_at', date('Y'))->count();
@@ -71,6 +54,7 @@ class Student extends Model
             $percentage = ($numerator / $denomerator) * 100 ;
         return ['numerator' => $numerator, 'denomerator' => $denomerator, 'percentage' => $percentage] ;
     }
+
     public function statementCount() {
         $count = Statement::where('student_id', $this->id)->count();
         return $count;

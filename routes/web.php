@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function() {
      * This section is for handling the class index page on admin side for features such as
      * 1. Attendance ,
      * 2. Student detail named as detail , 
-     * 3. Statement ,
+     * 3. Statement,
      * 4. 
      * to display the list of class
      */
@@ -65,6 +65,8 @@ Route::middleware(['auth'])->group(function() {
             Route::get('attendance/{id}','Admin\AdminAttendanceController@class')->name('index.class.attendance');
             Route::get('statement/{id}','Admin\AdminStatementController@class')->name('index.class.statement');
             Route::get('result/{id}','Admin\AdminResultController@class')->name('index.class.result');
+            Route::get('result/student/{id}', 'Admin\AdminResultController@show')->name('show.class.result');
+
         });
         Route::prefix('student')->group(function () {
             Route::get('statement/{id}','Admin\AdminStatementController@student')->name('index.student.statement');
@@ -88,12 +90,14 @@ Route::middleware(['auth'])->group(function() {
         Route::post('join', 'JoinController@approve')->name('join.approve');
 
         Route::get('result','ResultController@index')->name('result.index');
+        Route::get('result/create','ResultController@create')->name('result.create');
         Route::post('result','ResultController@store')->name('result.store');
     });
     Route::middleware(['can:is-student'])->prefix('student')->group(function(){
         Route::get('join', 'JoinController@create')->name('join.create');
         Route::post('join', 'JoinController@store')->name('join.store');
         Route::post('join/{joinreq}', 'JoinController@destroy')->name('join.destroy');
+        Route::get('result','Student\ResultController@index')->name('student.result.index');
     });
     /**
      * Bulk Upload section

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">{{$teacher->classDivision->grade->numeric." ".$teacher->classDivision->division->name  }}</h3>
+        <h3 class="text-dark mb-0">{{$teacher->classDivision->grade->numeric." ".$teacher->classDivision->division->name.' Student list'  }}</h3>
         @include('components.previous')
     </div>
     <div class="card shadow">
@@ -24,7 +24,7 @@
                             <td>{{ $student->code}}</td>
                             <td>{{ $student->name }}</td>
                             <td>
-                                <a class="text-center" href="" style="padding: 11px;">
+                                <a class="text-center" href="{{ route('show.class.result', $student->id) }}" style="padding: 11px;">
                                     <button class="btn btn-sm text-uppercase btn-primary" type="submit">
                                         view
                                     </button>

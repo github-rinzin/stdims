@@ -44,6 +44,7 @@ class MigrateInOrder extends Command
         *    ];
         */
         $migrations = [ 
+            '2021_03_20_135339_create_streams_table.php',
             '2021_02_27_090101_create_divisions_table.php',
             '2021_02_27_090244_create_grades_table.php',
             '2021_02_27_090431_create_class_divisions_table.php',

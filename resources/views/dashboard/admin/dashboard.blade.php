@@ -1,7 +1,11 @@
 @extends('layouts.admin')
 @section('content')    
-   
-<div class="container-fluid w-75">
+<style>
+    thead {
+  background-color: #343a40;
+}
+</style>
+<div class="container">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h4 class="text-dark mb-0">Dashboard</h4>
         @include('components.previous')
@@ -57,6 +61,7 @@
                             <th>Name</th>
                             <th>Grade</th>
                             <th>Section</th>
+                            <th>Stream</th>
                             <th>Total student</th>
                         </tr>
                     </thead>
@@ -66,8 +71,27 @@
                         <tr>
                             <td>{{ $i++}}</td>
                             <td class="text-capitalize">{{ $teacher->name }}</td>
-                            <td>{{ $teacher->ClassDivision->grade->numeric }}</td>
-                            <td>{{ $teacher->classDivision->division->name  }}</td>
+                            <td>
+                                @if (isset($teacher->ClassDivision))
+                                    {{ $teacher->ClassDivision->grade->numeric }}
+                                @else
+                                    {{__('Not Assigned')}}
+                                @endif
+                            </td>
+                            <td>
+                                @if (isset($teacher->ClassDivision))
+                                    {{ $teacher->classDivision->division->name  }}
+                                @else
+                                    {{__('Not Assigned')}}
+                                @endif
+                            </td>
+                            <td class="text-capitalize">
+                                @if (isset($teacher->ClassDivision->stream))
+                                    {{$teacher->ClassDivision->stream->name}}
+                                @else
+                                {{__('NA')}}
+                                @endif
+                            </td>
                             <td>{{ $teacher->totalStudents() }}</td>
                         </tr>
                         @endforeach
@@ -80,6 +104,7 @@
                             <td><strong>Name</strong></td>
                             <td><strong>Grade</strong></td>
                             <td><strong>Section</strong></td>
+                            <td><strong>Stream</strong></td>
                             <td><strong>Total Student</strong></td>
                         </tr>
                     </tfoot>
@@ -105,9 +130,12 @@
                         <tr>
                             <th>#</th>
                             <th>Student Number</th>
+                            <th>CID</th>
                             <th >Name</th>
+                            <th>Age</th>
                             <th>Class</th>
                             <th>Section</th>
+                            <th>Stream</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,9 +143,16 @@
                         <tr>
                             <td>{{ $j++ }}</td>
                             <td>{{ $student->code }}</td>
+                            <td>{{ $student->cid }}</td>
                             <td class="text-capitalize">{{ $student->name }}</td>
+                            <td>{{ $student->age}}</td>
                             <td>{{ $student->classDivision->grade->numeric }}</td>
                             <td>{{ $student->classDivision->division->name }}</td>
+                            <td class="text-capitalize">
+                                @if (isset($student->classDivision->stream))
+                                    {{$student->classDivision->stream->name}}
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -125,9 +160,12 @@
                         <tr>
                             <td><strong>#</strong></td>
                             <td><strong>Student Number</strong></td>
+                            <td><strong>CID</strong></td>
                             <td><strong>Name</strong></td>
+                            <td>Age</td>
                             <td><strong>Class</strong></td>
                             <td><strong>Section</strong></td>
+                            <td><strong>Stream</strong></td>
                         </tr>
                     </tfoot>
                 </table>

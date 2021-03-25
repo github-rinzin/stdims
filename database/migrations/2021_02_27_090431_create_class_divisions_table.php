@@ -17,8 +17,10 @@ class CreateClassDivisionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('grade_id');
             $table->unsignedBigInteger('division_id');
+            $table->unsignedBigInteger('stream_id')->nullable()->default(null);
             $table->foreign('grade_id')->references('id')->on('grades');
             $table->foreign('division_id')->references('id')->on('divisions');
+            $table->foreign('stream_id')->references('id')->on('streams');
             $table->timestamps();
         });
     }

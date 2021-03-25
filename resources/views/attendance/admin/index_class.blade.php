@@ -13,8 +13,9 @@
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
-                            <th class="text-left">Class/numeric</th>
+                            <th class="text-left">Class/Grade</th>
                             <th class="text-left">Section/Division</th>
+                            <th class="text-left">Stream</th>
                             <th class="text-left">Class Teacher</th>
                             <th class="text-left">Number of Student</th>
                             <th class="text-center">Actions</th>
@@ -27,15 +28,24 @@
                             <td class="text-center">{{ $i++ }}</td>
                             <td>{{ $teacher->classDivision->grade->numeric }}</td>
                             <td>{{ $teacher->classDivision->division->name }}</td>
+                            @if ($teacher->classDivision->stream != null)
+                            <td class="text-capitalize">
+                                {{ $teacher->classDivision->stream->name }}
+                            </td>
+                            @else
+                                <td>NA</td>
+                            @endif
                             <td>{{ $teacher->name }}</td>
                             <td>{{ $teacher->totalStudents()}}</td>
                             <td class="text-center">
                                 @if ($teacher->totalStudents() !=0)  
                                 <a href="{{ route('index.class.attendance', $teacher->id) }}">
-                                    <button class="btn btn-sm text-uppercase btn-primary" type="submit">
+                                    <button class="btn btn-sm btn-primary" type="submit">
                                         view
                                     </button>
                                 </a>
+                                @else
+                                NA
                                 @endif
                             </td>
                         </tr>
@@ -44,8 +54,9 @@
                     <tfoot>
                         <tr>
                             <td><strong>#</strong></td>
-                            <td><strong>Class&nbsp;</strong></td>
-                            <td><strong>Section</strong></td>
+                            <td><strong>Class/Grade&nbsp;</strong></td>
+                            <td><strong>Section/Division</strong></td>
+                            <td><strong>Stream</strong></td>
                             <td class="text-left"><strong class="text-center">Class Teacher</strong></td>
                             <td class="text-left"><strong>Number of Student</strong></td>
                             <td class="text-center"><strong>Actions</strong></td>

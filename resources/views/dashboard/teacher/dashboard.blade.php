@@ -1,5 +1,10 @@
 @extends('layouts.teacher')
 @section('content')
+<style>
+       thead {
+  background-color: #343a40;
+}
+</style>
 <div class="container-fluid w-75">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Dashboard</h3>
@@ -14,7 +19,7 @@
                 <div class="card-body">
                     <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                         <table class="table table-bordered table-sm dataTable my-0" id="dataTable">
-                            <thead>
+                            <thead class="bg-dark text-light">
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th>Student Number</th>
@@ -67,7 +72,7 @@
                 <div class="card-body">
                     <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                         <table class="table table-bordered table-sm dataTable my-0" id="dataTable">
-                            <thead>
+                            <thead class="bg-dark text-light">
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th>Student Number</th>

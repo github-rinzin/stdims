@@ -23,6 +23,8 @@ class CreateResult78sTable extends Migration
             $table->integer('science');
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students');
+            $table->unsignedBigInteger('class_division_id');
+            $table->foreign('class_division_id')->references('id')->on('class_divisions');
             $table->timestamps();
         });
     }

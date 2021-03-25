@@ -10,6 +10,7 @@ use App\ClassDivision;
 use App\Teacher;
 use App\Student;
 use App\Address;
+use App\Stream;
 
 class TestSeeder extends Seeder
 {
@@ -217,5 +218,17 @@ class TestSeeder extends Seeder
         //     'gewog' => 'bayphug',
         //     'dzongkhag' => 'trashiggang'
         // ]);
+        Stream::create([
+            'id' => 1,
+            'name' => 'science'
+        ]);
+        Stream::create([
+            'id' => 2,
+            'name' => 'commerce'
+        ]);
+        Stream::create([
+            'id' => 3,
+            'name' => 'arts'
+        ]);
     }
 }

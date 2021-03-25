@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\ClassDivision;
 use App\Grade;
 use App\Division;
-use Illuminate\Http\Request;
+use App\Stream;
 
 class ClassDivisionController extends Controller
 {
@@ -30,9 +31,11 @@ class ClassDivisionController extends Controller
     {
         $grades = Grade::all();
         $divisions = Division::all();
+        $streams = Stream::all();
         return view('class.admin.create')
                 ->with('grades', $grades)
-                ->with('divisions', $divisions);
+                ->with('divisions', $divisions)
+                ->with('streams', $streams);
     }
     /**
      * Store a newly created resource in storage.
@@ -52,10 +55,14 @@ class ClassDivisionController extends Controller
             $classDivision = new ClassDivision;
             $classDivision->grade_id = $grade->id;
             $classDivision->division_id = $division->id;
+            if($request->streamId != 'null' && $grade->numeric >= 11){
+                $classDivision->stream_id =  $request->streamId;
+            }
             $classDivision->save();
             return redirect()->route('class.index')->with('msg','Class Created !');
+        }else {
+            return redirect()->route('class.index')->with('msg','Class Already Exist !');  
         }
-        return redirect()->route('class.index')->with('msg','Class Already Exist !');  
     }
     /**
      * Display the specified resource.

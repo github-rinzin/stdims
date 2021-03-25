@@ -18,11 +18,13 @@ class CreateResult1112scisTable extends Migration
             $table->integer('english');
             $table->integer('dzongkha');
             $table->integer('maths');
-            $table->integer('bio/math');
+            $table->integer('biology');
             $table->integer('physics');
             $table->integer('chemistry');
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students');
+            $table->unsignedBigInteger('class_division_id');
+            $table->foreign('class_division_id')->references('id')->on('class_divisions');
             $table->timestamps();
         });
     }

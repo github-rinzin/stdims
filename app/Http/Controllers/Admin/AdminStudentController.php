@@ -11,7 +11,10 @@ class AdminStudentController extends Controller
 {
     public function class($id) {
         $teacher = Teacher::findOrFail($id);
-        $students = Student::where('class_division_id', $teacher->classDivision->id)->paginate(10);
-        return view('detail.admin.index')->with('teacher', $teacher)->with('students', $students)->with('i', 1);
+        $students = Student::where('class_division_id', $teacher->classDivision->id)->paginate(1);
+        return view('detail.admin.index')
+            ->with('teacher', $teacher)
+            ->with('students', $students)
+            ->with('i', 1);
     }
 }

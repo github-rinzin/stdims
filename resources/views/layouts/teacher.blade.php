@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="{{ asset('asset/admin/assets/fonts/fontawesome5-overrides.min.css') }}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 </head>
 
-<body>
+<body class="">
     <div id="wrapper">
         @include('inc.teacher.sidebar')
          <div class="d-flex flex-column" id="content-wrapper">

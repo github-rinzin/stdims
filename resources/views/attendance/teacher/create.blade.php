@@ -6,7 +6,7 @@
     <h3 class="text-dark mb-0">Attendance</h3>
     @include('components.previous')
 </div>
-<form action="{{ route('attendance.store') }}" method="POST">
+<form name="teacher-attendance" action="{{ route('attendance.store') }}" method="POST">
     @csrf
     @method('post')
 <div class="card shadow">
@@ -14,6 +14,9 @@
         <div class="m-0 p-0 form-group form-inline">
             <label>Attendance for :&nbsp;&nbsp;</label>
             <input name="date" class="form-control" type="date" required>
+            <div class="valid-feedback">
+                Looks good!
+              </div>
         </div>
     </div>
     <div class="card-body">

@@ -10,4 +10,7 @@ class Result_11_12arts extends Model
     public function student() {
         return $this->belongsTo(Student::class);
     }
+    public function classDivision() {
+        return $this->belongsTo(ClassDivision::class);
+    }
 }

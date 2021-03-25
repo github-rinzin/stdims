@@ -52,6 +52,7 @@ class DashboardController extends Controller
      */
     public function student(Request $request) {
         Gate::authorize('is-student');
+        return view('dashboard.student.dashboard');
         return redirect()->route('student.show', $request->user()->student->id);
     }
 }

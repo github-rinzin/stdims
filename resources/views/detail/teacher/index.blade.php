@@ -15,15 +15,6 @@
                         <p class="text-primary m-0 font-weight-bold">Student Information</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="row float-right">
-                        <div class="col-md-6 text-nowrap">
-                            <form class="form-inline " target="_self">
-                                <div class="form-group"><label for="search-field"></label><input class="form-control search-field" type="search" id="search-field" name="search" placeholder="Search by name"><i class="fa fa-search ml-2" style="font-size: 20pt;"></i></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
@@ -71,14 +62,8 @@
             </div>
             <div class="row justify-content-end">
                 <div class="col-md-6">
-                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                        </ul>
+                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers float-right">
+                        {{$students->links()}}
                     </nav>
                 </div>
             </div>

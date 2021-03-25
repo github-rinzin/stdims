@@ -14,7 +14,7 @@
                <div class="card-header">
                    <h1 class="card-title">NO RECORDS</h1>
                </div>
-               @else
+            @else
                
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table table-sm table-bordered dataTable my-0" id="dataTable">
