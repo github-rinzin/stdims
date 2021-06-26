@@ -58,9 +58,9 @@
             </div>
             <div class="form-row justify-content-end">
                 <div class="col-md-6">
-                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                   
                         {{$attendances->links()}}
-                    </nav>
+                    
                 </div>
             </div>
         </div>

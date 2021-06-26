@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Teacher;
 use App\Student;
 use App\Attendance;
-
+use Carbon\Carbon;
 class AdminAttendanceController extends Controller
 {
     public function class($id) {
@@ -19,7 +19,12 @@ class AdminAttendanceController extends Controller
     }
     public function student($student_id)
     {
-        $attendances = Attendance::where('student_id', $student_id)->paginate(30);  
+        $attendances = Attendance::where('student_id', $student_id)
+            ->whereBetween('created_at', [
+                Carbon::now()->startOfYear(),
+                Carbon::now()->endOfYear(),
+            ])
+            ->paginate(30);  
         return view('attendance.admin.show')->with('attendances', $attendances)->with('i', 1);    
     }
 }

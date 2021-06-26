@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Attendance;
 use App\Student;
+use Carbon\Carbon;
 
 class AttendanceController extends Controller
 {
