@@ -7,7 +7,7 @@
     </div>
     <div class="card shadow">
         <div class="card-header py-3">
-            <p class="text-primary m-0 font-weight-bold">Attandance Information</p>
+            <p class="text-primary m-0 font-weight-bold">Attendance Information</p>
         </div>
         <div class="card-body">
             @if($attendances->isEmpty())

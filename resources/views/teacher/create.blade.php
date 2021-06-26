@@ -16,23 +16,25 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Teacher Id</label>
-                                <input name="id" class=" form-control form-control-sm {{ $errors->has('id') ? 'error' : '' }}" type="text">
-                                     @if ($errors->has('id'))
-                                        <div class="error">
-                                             {{ $errors->first('id')}}
-                                        </div>
-                                     @endif
+                                <input name="id" class=" form-control form-control-sm" type="text" @error('id')
+                                    is-invalid
+                                @enderror required>
+                                @error('id')
+                                    <div class="alert alert-danger">
+                                        {{$message}}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label> Full Name</label>
-                                <input name="name" class=" form-control form-control-sm {{ $errors->has('name') ? 'error' : '' }} " type="text">
-                                @if ($errors->has('name'))
-                                        <div class="error">
-                                             {{ $errors->first('name')}}
-                                        </div>
-                                @endif
+                                <input name="name" class="form-control form-control-sm" @error('name')
+                                    is-invalid
+                                @enderror type="text" required>
+                                @error('name')
+                                    {{$message}}
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -40,34 +42,19 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>E-Mail</label>
-                                <input name="email" class=" form-control form-control-sm {{ $errors->has('email') ? 'error' : '' }} " type="email" >
-                                @if ($errors->has('email'))
-                                        <div class="error">
-                                             {{ $errors->first('email')}}
-                                        </div>
-                                @endif
+                                <input name="email" class=" form-control form-control-sm" type="email" required>
                             </div>
                         </div>
                         <div class="col">
                             <label>Password</label>
-                            <input name="password" class=" form-control form-control-sm {{ $errors->has('password') ? 'error' : '' }} " type="text">
-                            @if ($errors->has('password'))
-                                    <div class="error">
-                                         {{ $errors->first('password')}}
-                                    </div>
-                            @endif
+                            <input name="password" class=" form-control form-control-sm" type="text" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <div class="form-group">
                                 <label>Username</label>
-                                <input name="username" class=" form-control form-control-sm {{ $errors->has('username') ? 'error' : '' }} " type="text">
-                                @if ($errors->has('username'))
-                                     <div class="error">
-                                          {{ $errors->first('username')}}
-                                    </div>
-                                @endif 
+                                <input name="username" class=" form-control form-control-sm " type="text" required>
                             </div>
                         </div>
                         <div class="col">
@@ -76,12 +63,14 @@
                                 <select  name="class_division_id" class="form-select form-control form-control-sm " type="text" placeholder="class" aria-label="Default select example">
                                     <option value="empty" selected>grade/division/stream</option>
                                     @foreach ($classDivisions as $class) 
+                                        @if($class->teacher() == null)
                                         <option class="text-capitalize" value="{{ $class->id}}">
                                             {{ $class->grade->numeric.'    '.$class->division->name}}
                                             @if ($class->stream_id != null )
                                                 {{$class->stream->name }}
                                             @endif
                                         </option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -96,9 +85,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="card-footer">
-
             </div>
         </div>
     </div>

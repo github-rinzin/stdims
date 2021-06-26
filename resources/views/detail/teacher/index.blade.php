@@ -7,7 +7,6 @@
         @include('components.previous')
     </div>
     <div class="card shadow">
-        
         <div class="card-body">
             <div class="row">
                 <div class="col">

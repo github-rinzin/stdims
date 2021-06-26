@@ -72,8 +72,11 @@
                                 @csrf
                                 @method('post')
                                 <div class="form-group">
-                                    <label for="file">Excel file</label>
+                                    <label for="file" class="@error('title') is-invalid @enderror">Excel file</label>
                                     <input type="file" name="file" id="file" class="form-control form-control-sm p-0" style="border:none;">
+                                    @error('file')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <button type="submit" class="btn btn-sm btn-info">
                                     Bulk Upload
@@ -106,9 +109,9 @@
                         <tr>
                             <th class="text-center">#</th>
                             <th class="text-left">Student Number</th>
+                            <th class="text-left">CID</th>
                             <th class="text-left">Name</th>
                             <th class="text-left">Age</th>
-                            <th class="text-left">CID</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -117,19 +120,19 @@
                         <tr>
                             <td class="text-center">{{ $i++ }}</td>
                             <td>{{ $student->code }}</td>
+                            <td>{{ $student->cid }}</td>
                             <td>{{ $student->name }}</td>
                             <td>{{ $student->age }}</td>
-                            <td>{{ $student->cid }}</td>
                             <td class="text-center">
-                                <a href="{{ route('student.edit', $student->id) }}" class="btn btn-sm btn-info">
+                                {{-- <a href="{{ route('student.edit', $student->id) }}" class="btn btn-sm btn-info">
                                     edit
-                                </a>
+                                </a> --}}
                                 <a href="{{ route('student.show', $student->id) }}" class="btn btn-sm btn-primary">
                                     view
                                 </a>
-                                <button data-action="{{route('student.destroy', $student->id)}}" class="btn btn-sm btn-dark delete-student-admin"  data-target="#delete-student-personal-detail" data-toggle="modal">
+                                {{-- <button data-action="{{route('student.destroy', $student->id)}}" class="btn btn-sm btn-dark delete-student-admin"  data-target="#delete-student-personal-detail" data-toggle="modal">
                                     delete
-                                </button>
+                                </button> --}}
                             </td>
                         </tr>                      
                         @endforeach
@@ -172,10 +175,11 @@
                         <tr>
                             <th class="text-center">#</th>
                             <td><strong>Student Number</strong></td>
+                            <td class="text-left"><strong class="text-center">CID</strong></td>
                             <td><strong>Name</strong></td>
                             <td><strong>Age</strong></td>
-                            <td class="text-left"><strong class="text-center">CID</strong></td>
-                            <td class="text-center"><strong>Actions</strong></td>
+                            <th class="text-center">Actions</th>
+
                         </tr>
                     </tfoot>
                 </table>

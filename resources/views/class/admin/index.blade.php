@@ -100,15 +100,20 @@
                         @csrf
                         <div class="mb-3">
                           <label for="gradeNumeric" class="form-label text-capitalize">Grade numeric</label>
-                          <input name="numeric" type="text" class="form-control form-control-sm" id="gradeNumeric">
+                          <input name="numeric" type="text" class="form-control form-control-sm" id="gradeNumeric" required @error('numeric')
+                              is-invalid
+                          @enderror>
                         </div>
+                        @error('numeric')
+                            <div class="alert alert-danger mt-1">{{$message}}</div>
+                        @enderror
                         <button type="submit" class="btn btn-sm btn-primary">Add</button>
                     </form>
                     <form class="mt-4" action="{{ route('division.store') }}" method="POST"> 
                         @csrf
                         <div class="mb-3">
                         <label for="divisionName" class="form-label text-capitalize">Division name</label>
-                        <input name="division_name" type="text" class="form-control form-control-sm" id="divisionName">
+                        <input name="division_name" type="text" class="form-control form-control-sm" id="divisionName" required>
                         </div>
                         <button type="submit" class="btn btn-sm btn-primary">Add</button>
                     </form>

@@ -13,11 +13,14 @@
     <div class="card-header ">
         <div class="m-0 p-0 form-group form-inline">
             <label>Attendance for :&nbsp;&nbsp;</label>
-            <input name="date" class="form-control" type="date" required>
+            <input name="date" class="form-control" type="date" required @error('date') is-invalid @enderror>
             <div class="valid-feedback">
                 Looks good!
-              </div>
+            </div>
         </div>
+        @error('date')
+            <div class="arlert alert-danger mt-2">{{ $message }}</div>
+        @enderror
     </div>
     <div class="card-body">
         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">

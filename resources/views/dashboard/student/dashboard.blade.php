@@ -65,9 +65,12 @@
                             <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>Class teacher</span></div>
                             <div class="text-dark font-weight-bold h5 mb-0 text-capitalize"><span></span>
                                 @if (auth()->user()->student->class_division_id != null)
-                                   
-                                         {{Auth::user()->student->classDivision->teacher->name}}
-                                    
+                                    @if (Auth::user()->student->classDivision->teacher != null)
+                                        
+                                        {{Auth::user()->student->classDivision->teacher->name}}
+                                    @else  
+                                        Class Teacher Not Assigned
+                                    @endif
                                 @endif
                             </div>
                         </div>

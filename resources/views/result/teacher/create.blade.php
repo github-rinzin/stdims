@@ -14,7 +14,7 @@
             <form action="{{ route('result.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <label for="file">Excel file (.xlsx only)</label>
-                <input type="file" name="file" id="" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                <input type="file" name="file" id="" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
                 <button class="btn btn-sm btn-dark float-right" type="submit">
                     Upload
                 </button>

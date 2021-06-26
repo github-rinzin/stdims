@@ -18,6 +18,11 @@ class JoinController extends Controller
     }
     //  this action is for handling the approve actio for teacher
     public function approve(Request $request) {
+        $request->validate([
+            'student_id' => "required|numeric",
+            'class_id' => "required",
+            'request_id' => "required",
+        ]);
         $student = Student::findOrFail($request->student_id);
         $student->class_division_id = $request->class_id;
         $student->save();

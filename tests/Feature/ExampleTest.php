@@ -15,8 +15,7 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $user = User::findOrFail(3);
-        $response = $this->actingAs($user)->get('/dashboard/admin');
+        $response = $this->get('/');
 
         $response->assertStatus(200);
     }

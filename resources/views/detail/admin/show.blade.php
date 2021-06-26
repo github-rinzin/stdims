@@ -13,12 +13,15 @@
                         <div class="col">
                             <div class="form-group"><span>Name</span><input class="border rounded border-white form-control" type="text" disabled="" readonly="" value="{{ $student->name}}"></div>
                         </div>
+                        @if (isset($student->classDivision->id))
+                            
                         <div class="col">
                             <div class="form-group"><span>Class/Grade</span><input class="border-white form-control" type="text" disabled="" readonly="" value="{{ $student->classDivision->grade->numeric }}"></div>
                         </div>
                         <div class="col">
                             <div class="form-group"><span>Section/Division/Stream</span><input class="border-white form-control" type="text" disabled="" readonly="" value="{{ $student->classDivision->division->name }}"></div>
                         </div>
+                        @endif
                     </div>
                     <div class="form-row">
                         <div class="col">
@@ -86,9 +89,12 @@
                             <div class="form-group"><span>Mother's Address</span><input class="border-white form-control" type="text" disabled="" readonly=""  value="{{ $student->mothers_address }}"></div>
                         </div>
                     </div>
+                    @if (isset($student->classDivision->id))
+                        
                     <div class="form-row">
                         <div class="col"><a href="{{ route('student.edit', $student->id ) }}"><button class="btn btn-primary ml-auto" type="button">Edit&nbsp; &nbsp;<i class="fa fa-edit"></i>&nbsp;</button></a></div>
                     </div>
+                    @endif
                 </form>
             </div>
         </div>

@@ -24,7 +24,7 @@ class CreateResult1112artsTable extends Migration
             $table->integer('media');
             $table->integer('rigzhung');
             $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');;
             $table->unsignedBigInteger('class_division_id');
             $table->foreign('class_division_id')->references('id')->on('class_divisions');
             $table->timestamps();

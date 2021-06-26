@@ -45,8 +45,12 @@ class ClassDivisionController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'gradeId' => "required",
+            'divisionId' => "required",
+        ]);
         if($request->gradeId == "empty" || $request->divisionId == "empty") {
-            return redirect()->route('class.index')->with('msg','Enter valid class and division!');
+            return redirect()->back()->with('msg','Enter valid class and division!');
         }
         $grade = Grade::findOrFail($request->gradeId);
         $division = Division::findOrFail($request->divisionId);

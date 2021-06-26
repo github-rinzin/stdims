@@ -11,12 +11,6 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    {{-- <form class="float-left form-inline mr-auto" target="_self">
-                        <div class="form-group">
-                            <label for="search-field"></label>
-                            <input class="form-control search-field" type="search" id="search-field" name="search" placeholder="Search by name"><i class="fa fa-search ml-2" style="font-size: 20pt;"></i>
-                        </div>
-                    </form> --}}
                 </div>
                 <div class="col-md-6">
                     <a href="{{ route('attendance.create') }}">

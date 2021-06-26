@@ -6,6 +6,7 @@
         </a>
         <ul class="nav navbar-nav text-light" id="accordionSidebar">
             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('student.dashboard') }}"><i class="fas fa-user"></i><span>Dashboard</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('student.index') }}"><i class="fas fa-user"></i><span>My Details</span></a></li>
             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('attendance.index')}}"><i class="fas fa-table"></i><span>Attendance</span></a></li>
             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('statement.index')}}"><i class="fas fa-table"></i><span>Statement</span></a></li>
             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('student.result.index')}}"><i class="fas fa-table"></i><span>Result</span></a></li>

@@ -11,7 +11,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
+    
     public function store(Request $request){
+        $request->validate([
+            'file' => 'required',
+        ]);
         Excel::import(new UserImport, $request->file);
         Excel::import(new StudentImport, $request->file);
         Excel::import(new AddressImport, $request->file);

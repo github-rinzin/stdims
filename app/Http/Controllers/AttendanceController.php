@@ -43,6 +43,9 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'date' => 'required|after:yesterday',
+        ]);
         Gate::authorize('is-teacher');
         for($i = 0; $i < count($request->student_id); $i++) {
             $attendance = new Attendance;

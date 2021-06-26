@@ -5,7 +5,7 @@
   background-color: #343a40;
 }
 </style>
-<div class="container-fluid w-75">
+<div class="container-fluid ">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Dashboard</h3>
         @include('components.previous')
@@ -23,9 +23,12 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th>Student Number</th>
+                                    <th>CID</th>
                                     <th>Name</th>
                                     <th>Father Name</th>
-                                    <th>Contact</th>
+                                    <th>Father Contact</th>
+                                    <th>Mother Name</th>
+                                    <th>Mother Contact</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,9 +36,12 @@
                                 <tr>
                                     <td class="text-center">{{ $i++ }}</td>
                                     <td >{{ $student->code }}</td>
+                                    <td >{{ $student->cid }}</td>
                                     <td class="text-capitalize">{{ $student->name }}</td>
                                     <td class="text-capitalize">{{ $student->fathers_name }}</td>
                                     <td>{{ $student->fathers_contact }}</td>
+                                    <td class="text-capitalize">{{ $student->mothers_name }}</td>
+                                    <td>{{ $student->mothers_contact }}</td>
                                 </tr>
                                 @endforeach
                                
@@ -44,9 +50,12 @@
                                 <tr>
                                     <td class="text-center"><strong>#</strong></td>
                                     <td><strong>Student Number</strong></td>
+                                    <th>CID</th>
                                     <td><strong>Name</strong></td>
                                     <td><strong>Fathers Name</strong></td>
                                     <td><strong>Contact</strong></td>
+                                    <th>Mother Name</th>
+                                    <th>Mother Contact</th>
                                 </tr>
                             </tfoot>
                         </table>

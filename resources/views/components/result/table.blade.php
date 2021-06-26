@@ -349,16 +349,6 @@
                     </tr>                    
                 @endforeach
                 </tbody>
-                <tfoot class="bg-dark text-light">
-                        <th>English</th>
-                        <th>Dzongkha</th>
-                        <th>B-Maths</th>
-                        <th>History</th>
-                        <th>Geography</th>
-                        <th>Eco/IT</th>
-                        <th>Media</th>
-                        <th>Rigzhung</th>
-                </tfoot>
             </table>
             @endif
         @elseif(auth()->user()->student->classDivision->grade->numeric  >= 9)

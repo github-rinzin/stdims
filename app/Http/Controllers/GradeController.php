@@ -35,17 +35,24 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        $oldGrade = Grade::where( 'numeric', '=' ,$request->numeric )->get();
-        if($oldGrade->isEmpty()){
-            if($request->numeric > 12 || $request->numeric < 0) {
-                return redirect()->back()->with('msg','Enter Grade between 1 - 12');
+        $request->validate([
+            'numeric' => 'required|numeric|min:7|max:12'
+        ]);
+        if(is_numeric($request->numeric)){
+            $oldGrade = Grade::where( 'numeric', '=' ,$request->numeric )->get();
+            if($oldGrade->isEmpty()){
+                if($request->numeric > 12 || $request->numeric < 0) {
+                    return redirect()->back()->with('msg','Enter Grade between 1 - 12');
+                }
+                $grade = new Grade;
+                $grade->numeric = $request->numeric;
+                $grade->save();
+                return redirect()->back()->with('msg','Grade Successfully Created.');
+            }  else {
+                return redirect()->back()->with('msg','Grade already exist.');
             }
-            $grade = new Grade;
-            $grade->numeric = $request->numeric;
-            $grade->save();
-            return redirect()->back()->with('msg','Grade Successfully Created.');
-        }  else {
-            return redirect()->back()->with('msg','Grade already exist.');
+        }else {
+            return redirect()->back()->with('msg','Enter Valid grade');
         }
     }
 

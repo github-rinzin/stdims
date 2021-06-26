@@ -39,13 +39,11 @@
                                 @endif
                             </td>
                             <th>
-                            <form action="{{ route('teacher.destroy', $teacher->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button class="btn-dark btn-sm btn " type="submit">
+                            
+                                <button data-action="{{route('teacher.destroy', $teacher->id)}}" class="btn btn-sm btn-dark delete-student-admin"  data-target="#delete-teacher" data-toggle="modal">
                                     delete
                                 </button>
-                            </form> 
+
                             </th>
                         </tr>
                         @endforeach
@@ -72,4 +70,37 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.delete-student-admin').click(function (e) { 
+            e.preventDefault();
+            let action = $(this).attr('data-action');
+            $('.delete-form').attr('action', action);
+        });
+        $('.confirm-delete-bnt').click(function (e) { 
+            $('.delete-form').submit();
+        });
+    });
+</script>
+{{-- delete modal - start --}}
+<div class="modal fade" role="dialog" tabindex="-1" id="delete-teacher">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Warning!</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="modal-body">
+                <p>You are about to delete the detail permenantly !</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                <button  type="submit" class="btn btn-primary btn-sm confirm-delete-bnt">Confirm, Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- delete modal - end --}}
+<form class="delete-form" action="" method="post">
+    @csrf
+    @method('delete')
+</form>
 @endsection

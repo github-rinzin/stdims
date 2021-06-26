@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="container-fluid w-75">
+    @include('components.alert')
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Class&nbsp;</h3>
         @include('components.previous')
@@ -13,15 +14,15 @@
                     @csrf
                     <div class="form-row">
                         <div class="col">
-                            <select  name="gradeId" class="form-select form-control form-control-sm" type="text" placeholder="class numeric...." aria-label="Default select example">
+                            <select  name="gradeId" class="form-select form-control form-control-sm" type="text" placeholder="class numeric...." aria-label="Default select example" required>
                                 <option value="empty" selected>grade</option>
                                 @foreach ($grades as $grade) 
                                     <option value="{{ $grade->id}}">{{ $grade->numeric}}</option>
                                 @endforeach
-                              </select>
+                            </select>
                         </div>
                         <div class="col">
-                            <select name="divisionId" class="form-select form-control form-control-sm"  placeholder="division/section name..." aria-label="Default select example">
+                            <select name="divisionId" class="form-select form-control form-control-sm"  placeholder="division/section name..." aria-label="Default select example" required>
                                 <option value="empty" selected>division</option>
                                 @foreach ($divisions as $division)
                                     <option value="{{ $division->id}}">{{ $division->name}}</option>

@@ -35,15 +35,22 @@ class DivisionController extends Controller
      */
     public function store(Request $request)
     {
-        $oldDivision = Division::where( 'name', '=' ,$request->division_name )->get();
-        if($oldDivision->isEmpty()){
-            $division = new Division;
-            $division->name = $request->division_name;
-            $division->save();
-            return redirect()->back()->with('msg','Division Successfully Created.');
-        }  else {
-            return redirect()->back()->with('msg','Division already exist.');
-        }
+        $request->validate([
+            'division_name' => 'required',
+        ]);
+        if(!is_numeric($request->division_name)){
+            $oldDivision = Division::where( 'name', '=' ,$request->division_name )->get();
+            if($oldDivision->isEmpty()){
+                $division = new Division;
+                $division->name = $request->division_name;
+                $division->save();
+                return redirect()->back()->with('msg','Division Successfully Created.');
+            }  else {
+                return redirect()->back()->with('msg','Division already exist.');
+            }
+        } else {
+            return redirect()->back()->with('msg','Enter Valid division name.');
+        } 
     }
 
     /**

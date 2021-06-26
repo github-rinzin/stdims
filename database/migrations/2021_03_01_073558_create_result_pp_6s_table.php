@@ -21,7 +21,7 @@ class CreateResultPp6sTable extends Migration
             $table->integer('social_studies');
             $table->integer('science');
             $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->timestamps();
         });
     }

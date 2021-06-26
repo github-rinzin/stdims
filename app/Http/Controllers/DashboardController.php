@@ -24,13 +24,15 @@ class DashboardController extends Controller
         $teachers = Teacher::paginate(5);
         $students = Student::where('class_division_id', '<>' , 'null')->paginate(15);
         return view('dashboard.admin.dashboard')
-            ->with('numberOfStudents', $numberOfStudents)
-            ->with('numberOfTeachers', $numberOfTeachers)
-            ->with('numberOfClassDivisions',  $numberOfClassDivisions)
-            ->with('teachers', $teachers)
-            ->with('students', $students)
-            ->with('i',1)
-            ->with('j',1);
+                ->with([
+                    'numberOfStudents' => $numberOfStudents,
+                    'numberOfTeachers'=> $numberOfTeachers,
+                    'numberOfClassDivisions' =>  $numberOfClassDivisions,
+                    'teachers' => $teachers,
+                    'students' => $students,
+                    'i' => 1,
+                    'j' => 1,
+                ]);
     }
     /**
      * Display teacher dashboard.
@@ -42,8 +44,10 @@ class DashboardController extends Controller
         $class_division_id = User::findOrFail($request->user()->id)->teacher->class_division_id;
         $students = Student::where('class_division_id',  $class_division_id)->paginate(5);
         return view('dashboard.teacher.dashboard')
-            ->with('students', $students)
-            ->with('i',1);
+            ->with([
+                'students'=> $students,
+                'i' => 1,
+            ]);
     }
     /**
      * Display student dashboard.

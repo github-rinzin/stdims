@@ -7,13 +7,6 @@
         @include('components.previous')
     </div>
     <div class="card shadow">
-        <div class="card-header">
-            <form class="form-inline mr-auto" target="_self">
-                <div class="form-group"><label for="search-field"></label><input class="form-control search-field" type="search" id="search-field" name="search" placeholder="Search by name...."></div><i class="fa fa-search ml-2" style="font-size: 20pt;"></i>
-                <a
-                    class="ml-auto" href="statement-class-index.html"></a>
-            </form>
-        </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table table-sm table-bordered dataTable my-0" id="dataTable">

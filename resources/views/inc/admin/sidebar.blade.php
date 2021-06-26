@@ -5,7 +5,7 @@
             <div class="sidebar-brand-text mx-3"><span>Student ims</span></div>
         </a>
         <ul class="nav navbar-nav text-light" id="accordionSidebar">
-            <li class="nav-item" role="presentation"><a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('admin.detail.class') }}"><i class="far fa-user-circle"></i><span>Student</span></a></li>
             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('class.index') }}"><i class="far fa-user-circle"></i><span>Class</span></a></li>
             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('teacher.index') }}"><i class="fas fa-chalkboard-teacher"></i><span>Class Teacher</span></a></li>

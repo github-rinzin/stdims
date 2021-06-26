@@ -30,8 +30,6 @@ class StudentController extends Controller
         } else {
             abort(403);
         }
-        
-        
     }
 
     /**
@@ -52,25 +50,25 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'dob' => 'required',
-            'age' => 'required',
-            'cid' => 'required',
-            'house_number' => 'required',
-            'thram_number' => 'required',
-            'village' => 'required',
-            'gewog' => 'required',
-            'dzongkhag' => 'required',
-            'name_of_previous_school' => 'required',
-            'code' => 'required',
-            'fathers_name' => 'required',
-            'fathers_contact' => 'required',
-            'fathers_address' => 'required',
-            'mothers_name' => 'required',
-            'mothers_contact' => 'required',
-            'mothers_address' => 'required',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|between:10,50',
+        //     'dob' => 'required|date',
+        //     'age' => 'required|numeric|min:11|max:25',
+        //     'cid' => 'required|numeric',
+        //     'house_number' => 'required',
+        //     'thram_number' => 'required',
+        //     'village' => 'required',
+        //     'gewog' => 'required',
+        //     'dzongkhag' => 'required',
+        //     'name_of_previous_school' => 'required',
+        //     'code' => 'required',
+        //     'fathers_name' => 'required',
+        //     'fathers_contact' => 'required',
+        //     'fathers_address' => 'required',
+        //     'mothers_name' => 'required',
+        //     'mothers_contact' => 'required',
+        //     'mothers_address' => 'required',
+        // ]);
     }
 
     /**
@@ -116,10 +114,8 @@ class StudentController extends Controller
             return view('detail.teacher.edit')->with('student', $student);
            
         } else if (Gate::allows('is-student')) {
-
             # code...
             return view('detail.student.edit')->with('student', $student);
-            
         }
         abort(403);
 
@@ -134,14 +130,30 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $student->update($request->all());
+        $student->name = $request->name;
+        $student->dob = $request->dob;
+        $student->age = $request->age;
+        $student->cid = $request->cid;
+        $student->name_of_previous_school = $request->name_of_previous_school;
+        $student->code = $request->code;
+        $student->fathers_name = $request->fathers_name;
+        $student->fathers_contact = $request->fathers_contact;
+        $student->fathers_address = $request->fathers_address;
+        $student->mothers_name = $request->mothers_name;
+        $student->mothers_contact = $request->mothers_contact;
+        $student->mothers_address = $request->mothers_address;
+
+        $student->update();
+
         $address = Address::where('student_id',$student->id)->first();
         $address->house_number = $request->house_number;
         $address->thram_number = $request->thram_number;
         $address->village = $request->village;
         $address->gewog = $request->gewog;
         $address->dzongkhag = $request->dzongkhag;
+
         $address->update();
+        
         return redirect()->route('student.edit',$student->id)->with('msg','Successfully updated');
     }
 

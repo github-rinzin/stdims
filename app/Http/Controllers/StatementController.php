@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Statement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class StatementController extends Controller
 {
@@ -15,10 +16,9 @@ class StatementController extends Controller
      */
     public function index()
     {
-       if(Auth::user()->is('student')){
-           $statements = Statement::where('student_id', Auth::user()->student->id)->paginate(2);
-           return view('statement.student.index')->with('statements', $statements)->with('i',1);
-       }
+        Gate::authorize('is-student');
+        $statements = Statement::where('student_id', Auth::user()->student->id)->paginate(2);
+        return view('statement.student.index')->with('statements', $statements)->with('i',1);
     }
 
     /**
@@ -39,12 +39,16 @@ class StatementController extends Controller
      */
     public function store(Request $request)
     {
-       $statement = new Statement;
-       $statement->subject = $request->subject;
-       $statement->content = $request->content;
-       $statement->student_id = Auth::user()->student->id;
-       $statement->save();
-       return redirect()->route('statement.index')->with('msg', 'Submitted Successfully');
+        $request->validate([
+            'subject' => 'required|between:10,100',
+            'content' => 'required|between:10,1000',
+        ]);
+        $statement = new Statement;
+        $statement->subject = $request->subject;
+        $statement->content = $request->content;
+        $statement->student_id = Auth::user()->student->id;
+        $statement->save();
+        return redirect()->route('statement.index')->with('msg', 'Submitted Successfully');
     }
  
     /**
@@ -96,6 +100,8 @@ class StatementController extends Controller
      */
     public function destroy(Statement $statement)
     {
-        //
+        Gate::authorize('is-admin');
+        $statement->delete();
+        return redirect()->route('admin.statement.class')->with('msg', 'Deleted Successfully');
     }
 }

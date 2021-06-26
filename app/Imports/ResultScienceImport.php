@@ -22,7 +22,7 @@ class ResultScienceImport implements ToModel, WithHeadingRow
             'english'       => $row['english'],
             'dzongkha'      => $row['dzongkha'],
             'maths'	        => $row['maths'],
-            'biology'      => $row['biology'],
+            'biology'       => $row['biology'],
             'physics'       => $row['physics'],
             'chemistry'     => $row['chemistry']
         ]);

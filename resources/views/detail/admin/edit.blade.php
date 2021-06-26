@@ -35,7 +35,8 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <span>Student Code</span>
-                                <input name="code" class="form-control {{ $errors->has('code') ? 'error' : '' }}" type="text" value="{{$student->code}}">
+                                <input  class="form-control {{ $errors->has('code') ? 'error' : '' }}" type="text" value="{{$student->code}}" disabled>
+                                <input name="code" class="form-control " type="hidden" value="{{$student->code}}" >
                                 @if ($errors->has('code'))
                                      <div class="error">
                                           {{ $errors->first('code')}}

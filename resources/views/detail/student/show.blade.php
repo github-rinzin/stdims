@@ -101,9 +101,9 @@
                             <div class="form-group"><span>Mother's Address</span><input class="border-white form-control" type="text" disabled="" readonly=""  value="{{ $student->mothers_address }}"></div>
                         </div>
                     </div>
-                    <div class="form-row">
+                    {{-- <div class="form-row">
                         <div class="col"><a href="{{ route('student.edit', $student->id ) }}"><button class="btn btn-primary ml-auto" type="button">Edit&nbsp; &nbsp;<i class="fa fa-edit"></i>&nbsp;</button></a></div>
-                    </div>
+                    </div> --}}
                 </form>
             </div>
         </div>

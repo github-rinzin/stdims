@@ -2,8 +2,9 @@
 @section('content')    
 <style>
     thead {
-  background-color: #343a40;
-}
+        background-color: #343a40;
+        color:white;
+    }
 </style>
 <div class="container">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">

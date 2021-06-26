@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Imports\Result78Import;
-use App\Imports\Result910Import;
-use App\Imports\ResultArtsImport;
 use App\Imports\ResultCommerceImport;
-use App\Imports\ResultScienceImport;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Result_11_12sci;
-use App\Result_11_12com;
+use App\Imports\ResultScienceImport;
+use App\Imports\ResultArtsImport;
+use App\Imports\Result910Import;
+use App\Imports\Result78Import;
+use Illuminate\Http\Request;
 use App\Result_11_12arts;
+use App\Result_11_12com;
+use App\Result_11_12sci;
 use App\Result_9_10;
 
 
@@ -25,7 +25,9 @@ class ResultController extends Controller
         });
     }
     public function index() {
-        $class_division_id = auth()->user()->teacher->id;
+        // gives the list of result that belongs to a particular class
+        // class_division_id is fetched from the teacher
+        $class_division_id = auth()->user()->teacher->classDivision->id;
         $grade = auth()->user()->teacher->classDivision->grade->numeric;
         $results;
         if( $grade <= 12 && $grade >= 11) {
@@ -48,7 +50,7 @@ class ResultController extends Controller
     }
     public function store(Request $request) {
         if($request->hasFile('file')){
-            $class_division_id = $request->user()->teacher->id;
+            $class_division_id = $request->user()->teacher->classDivision->id;
             $grade = $request->user()->teacher->classDivision->grade->numeric;
             $flag = false;
             if( $grade <= 12 && $grade >= 11) {

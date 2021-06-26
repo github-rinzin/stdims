@@ -46,6 +46,15 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'id' => 'required|numeric',
+            'username' => 'required|between:2,25',
+            'email' => 'required|email',
+            'password' => 'required',
+            'class_division_id' => 'required|numeric',
+            'name' => 'required|between:2,25',
+        ]);
+        
         $user = new User;
         $teacher = new Teacher;
 
@@ -54,15 +63,16 @@ class TeacherController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->role_id = 2;
+
         $class_division_id  =$request->class_division_id;
-        // return $class_division_id;
+
         $teacher->user_id = $request->id;
         $teacher->class_division_id = $class_division_id;
         $teacher->name = $request->name;
-        // return dd([ 'teacher' => $teacher, 'user' =>$user ]);
-       
+
         $user->save();
         $teacher->save();
+
         return redirect()->route('teacher.index')->with('msg', 'Class Teacher account created successfully');
     }
 
