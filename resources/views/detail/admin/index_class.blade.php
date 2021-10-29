@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header bg-primary text-white">
                             Upload Student in Bulk
                         </div>
                         <div class="card-body">
@@ -73,7 +73,7 @@
                                 @method('post')
                                 <div class="form-group">
                                     <label for="file" class="@error('title') is-invalid @enderror">Excel file</label>
-                                    <input type="file" name="file" id="file" class="form-control form-control-sm p-0" style="border:none;">
+                                    <input type="file" name="file" id="file" class="form-control form-control-sm p-0" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="border:none;">
                                     @error('file')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -83,9 +83,9 @@
                                 </button>
                             </form>
                         </div>
-                        <div class="card-footer">
-                            <a href="/sample/student.xlsx" class="btn btn-sm btn-dark mt-2">
-                                Download sample file
+                        <div class="card-footer bg-primary text-white">
+                            <a href="/sample/student.xlsx" class="btn btn-sm btn-white text-white mt-2">
+                                <div class="fa fa-download mr-2"></div>Download sample file   
                             </a>
                         </div>
                     </div>
@@ -98,10 +98,9 @@
             </nav>
         </div>
     </div>
+    <h3 class="text-dark mb-0 mt-4">Student Without Class</h3>
+
     <div class="card mt-3">
-        <div class="card-header">
-            Student Without Class
-        </div>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table table-sm table-bordered dataTable my-0" id="dataTable">

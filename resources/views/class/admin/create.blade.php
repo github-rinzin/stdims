@@ -30,7 +30,7 @@
                             </select>
                         </div>
                         <div class="col">
-                            <select name="streamId" class="form-select form-control form-control-sm"  placeholder="division/section name..." aria-label="Default select example">
+                            <select name="streamId" class="form-select form-control form-control-sm"  placeholder="division/section name..." aria-label="Default select example" required>
                                 <option value="null" selected>stream</option>
                                 @foreach ($streams  as $stream)
                                     <option value="{{ $stream->id}}">{{ $stream->name}}</option>

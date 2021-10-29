@@ -184,11 +184,12 @@
                 <thead class="bg-dark text-light">
                     <tr>
                         <th colspan="2">Student Detail</th>  
-                        <th colspan="6">Subject name</th>
+                        <th colspan="7">Subject name</th>
                     </tr>
                     <tr> 
                         <th>Student Id</th>
                         <th>Name</th>
+
                         <th>English</th>
                         <th>Dzongkha</th>
                         <th>Maths</th>
@@ -198,16 +199,16 @@
                     </tr>
                 </thead >
                 <tbody class="text-center">
-                        @foreach ($results as $result)
+                    @foreach ($results as $result)
                         <tr>
                             <td>{{$result->student->id}}</td>
                             <td>{{$result->student->name}}</td>
+
                             <td>{{$result->english}}</td>
                             <td>{{$result->dzongkha}}</td>
                             <td>{{$result->maths}}</td>
                             <td>{{$result->history}}</td>
                             <td>{{$result->geography}}</td>
-                            <td>{{$result->biology}}</td>
                             <td>{{$result->science}}</td>
                         </tr>
                     @endforeach

@@ -47,7 +47,7 @@
                         </div>
                         <div class="col">
                             <label>Password</label>
-                            <input name="password" class=" form-control form-control-sm" type="text" required>
+                            <input name="password" class=" form-control form-control-sm" type="password" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -63,7 +63,7 @@
                                 <select  name="class_division_id" class="form-select form-control form-control-sm " type="text" placeholder="class" aria-label="Default select example">
                                     <option value="empty" selected>grade/division/stream</option>
                                     @foreach ($classDivisions as $class) 
-                                        @if($class->teacher() == null)
+                                        @if($class->teacher == null)
                                         <option class="text-capitalize" value="{{ $class->id}}">
                                             {{ $class->grade->numeric.'    '.$class->division->name}}
                                             @if ($class->stream_id != null )

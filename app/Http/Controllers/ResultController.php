@@ -13,6 +13,7 @@ use App\Result_11_12arts;
 use App\Result_11_12com;
 use App\Result_11_12sci;
 use App\Result_9_10;
+use App\Result_7_8;
 
 
 class ResultController extends Controller

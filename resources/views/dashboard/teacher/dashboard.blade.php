@@ -11,6 +11,52 @@
         @include('components.previous')
     </div>
     <div class="row">
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-primary py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Number of students</span></div>
+                            <div class="text-dark font-weight-bold h5 mb-0"><span>
+                                @if(auth()->user()->teacher->classDivision->students != null)
+                                {{ 
+                                    auth()->user()->teacher->classDivision->students->count()
+                                }}
+                                @else  
+                                    No Data
+                                @endif 
+                            </span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-primary py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Grade/Division/Stream</span></div>
+                            <div class="text-dark font-weight-bold h5 mb-0"><span>
+                                @if(auth()->user()->teacher->classDivision != null)
+                                {{ 
+                                    auth()->user()->teacher->classDivision->grade->numeric."/".auth()->user()->teacher->classDivision->division->name
+                                }}
+                                    @if (auth()->user()->teacher->classDivision->stream != null)
+                                    {{ auth()->user()->teacher->classDivision->stream->name }}
+                                    @endif
+                                @else  
+                                    No Data
+                                @endif 
+                            </span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
         <div class="col">
             <div class="card shadow mt-3">
                 <div class="card-header py-3">

@@ -43,10 +43,10 @@ class AttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {       
         $request->validate([
             'date' => 'required|after:yesterday',
-        ]);
+        ]); 
         Gate::authorize('is-teacher');
         for($i = 0; $i < count($request->student_id); $i++) {
             $attendance = new Attendance;
@@ -58,7 +58,7 @@ class AttendanceController extends Controller
         }   
         return redirect()->route('teacher.attendance.index'); 
     }
-
+    
     /**
      * Display the specified resource.
      *
